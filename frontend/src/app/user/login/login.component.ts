@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { LoginResponse } from '../../types/login';
 
 @Component({
   selector: 'app-login',
@@ -9,5 +11,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+    email = '';
+    password = '';
+  
+    constructor(private auth: AuthService, private router: Router) {}
+  
+    login() {
+      this.auth.login({ email: this.email, password: this.password }).subscribe(
+        (res: LoginResponse) => {
+          this.auth.saveUser(res);
+          this.router.navigate(['/home']);
+        },
+        (err) => alert('Invalid email or password!')
+      );
+    }
 }

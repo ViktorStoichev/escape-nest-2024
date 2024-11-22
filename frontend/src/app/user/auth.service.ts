@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginResponse } from '../types/login';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
     }
 
     login(user: { email: string; password: string }) {
-        return this.http.post(`${this.apiUrl}/login`, user);
+        return this.http.post<LoginResponse>(`${this.apiUrl}/login`, user);
     }
 
     saveUser(user: { username: string; email: string }): void {
