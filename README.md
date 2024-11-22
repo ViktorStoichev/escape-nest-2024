@@ -7,6 +7,7 @@
     Switch to ES modules and add start script
     Create Express and MongoDB configuration
     Add User mongoose model
+    Add auth controller
 
 # FrontEnd
     Create FrontEnd folder 
