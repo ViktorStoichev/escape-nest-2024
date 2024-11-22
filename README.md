@@ -4,5 +4,11 @@
 # BackEnd
     Create BackEnd folder
     Install dependencies (express, mongoose, cors)
-    Switch the type to module and add start script
+    Switch to ES modules and add start script
     Create Express and MongoDB configuration
+
+# FrontEnd
+    Create FrontEnd folder 
+    Setup Angular
+    Add global styles
+    Change page title
