@@ -5,10 +5,13 @@
         </div>
 
         <div class="user-links">
+            @if (!isLoggedIn()) {
             <a routerLink="/login">Login</a>
             <a routerLink="/register">Register</a>
+            }@else {
             <a routerLink="/profile">Profile</a>
-            <a routerLink="/logout">Logout</a>
+            <a (click)="logout()">Logout</a>
+            }
         </div>
     </div>
 

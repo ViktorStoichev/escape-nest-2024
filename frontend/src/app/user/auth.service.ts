@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../types/login';
+import { Observable } from 'rxjs';
+import { RegisterResponse } from '../types/register';
 
 @Injectable({
     providedIn: 'root'
@@ -11,19 +13,19 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) { }
 
-    register(user: { username: string; email: string; password: string }) {
-        return this.http.post(`${this.apiUrl}/register`, user);
+    register(user: { avatar: string, username: string; email: string; password: string }): Observable<RegisterResponse> {
+        return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, user);
     }
 
     login(user: { email: string; password: string }) {
         return this.http.post<LoginResponse>(`${this.apiUrl}/login`, user);
     }
 
-    saveUser(user: { username: string; email: string }): void {
+    saveUser(user: { avatar: string, username: string; email: string }): void {
         localStorage.setItem('user', JSON.stringify(user));
     }
 
-    getUser(): { username: string; email: string } | null {
+    getUser(): { avatar: string, username: string; email: string } | null {
         const user = localStorage.getItem('user');
         return user ? JSON.parse(user) : null;
     }

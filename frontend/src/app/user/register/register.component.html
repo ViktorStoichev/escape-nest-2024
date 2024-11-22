@@ -1,21 +1,21 @@
 <div class="form-container">
-    <form class="form">
+    <form class="form" (ngSubmit)="register()">
         <h2>Register</h2>
 
         <label for="avatar">Add Profile Avatar</label>
-        <input type="text" name="avatar" id="avatar" placeholder="URL...">
+        <input type="text" name="avatar" id="avatar" [(ngModel)]="avatar" placeholder="URL...">
 
         <label for="username">Username</label>
-        <input type="text" name="username" id="username">
+        <input type="text" name="username" id="username" [(ngModel)]="username">
 
         <label for="email">Email</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="email" [(ngModel)]="email">
 
         <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" [(ngModel)]="password">
 
         <label for="re-password">Repeat Password</label>
-        <input type="password" name="re-password" id="re-password">
+        <input type="password" name="re-password" id="re-password" [(ngModel)]="rePassword">
 
         <button type="submit">Submit</button>
         <p>Already have an account? <a routerLink="/login">Log in</a></p>
