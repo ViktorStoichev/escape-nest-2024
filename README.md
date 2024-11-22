@@ -25,3 +25,5 @@
         Add functionality to register component
         Create register component and add html/css
         Add route to the page
+    Create a home folder
+        Create about component and add html/css
