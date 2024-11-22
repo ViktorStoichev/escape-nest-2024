@@ -1,0 +1,16 @@
+footer {
+    width: 100%;
+    background-color: #DFEBF4;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: auto;
+    color: #134379;
+    margin-top: 30px;
+}
+
+footer p {
+    font-size: 30px;
+}

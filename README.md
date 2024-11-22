@@ -13,4 +13,5 @@
     Add global styles
     Change page title
     Create core folder for header and footer
-    Add html/css to header
+    Add header with html/css
+    Add footer with html/css
