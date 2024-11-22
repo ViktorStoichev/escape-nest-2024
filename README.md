@@ -8,6 +8,7 @@
     Create Express and MongoDB configuration
     Add User mongoose model
     Add auth controller
+    Make register and login requests
 
 # FrontEnd
     Create FrontEnd folder 
@@ -20,3 +21,4 @@
     Create user folder for all user services
         Create register component and add html/css
         Add route to the page
+        Create auth service

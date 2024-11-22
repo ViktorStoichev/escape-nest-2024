@@ -13,4 +13,16 @@ authController.post('/register', async (req, res) => {
     }
 });
 
+authController.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email, password });
+        if (!user) return res.status(404).json({ error: 'Invalid email or password!' });
+
+        res.json({ username: user.username, email: user.email });
+    } catch (error) {
+        res.status(500).json({ error: 'Login failed!' });
+    }
+});
+
 export default authController;
