@@ -9,9 +9,10 @@
 
 # FrontEnd
     Create FrontEnd folder 
-    Setup Angular
-    Add global styles
-    Change page title
+        Setup Angular
+        Add global styles
+        Change page title
     Create core folder for header and footer
-    Add header with html/css
-    Add footer with html/css
+        Add header with html/css
+        Add footer with html/css
+    Create user folder for all user services
