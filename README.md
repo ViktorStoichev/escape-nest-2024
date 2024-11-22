@@ -23,8 +23,9 @@
         Add route to the page
         Create auth service
         Add functionality to register component
-        Create register component and add html/css
+        Create login component and add html/css
         Add route to the page
+        Setup route guard
     Create a home folder
         Create about component and add html/css
         Create home component and add html/css
