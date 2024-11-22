@@ -27,3 +27,5 @@
         Add route to the page
     Create a home folder
         Create about component and add html/css
+        Create home component and add html/css
+        Add routes for them

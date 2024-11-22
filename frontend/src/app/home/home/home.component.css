@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+    color: #134379;
+    font-size: 50px;
+    width: 1100px;
+}
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
