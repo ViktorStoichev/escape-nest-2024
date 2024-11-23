@@ -1,23 +1,80 @@
 <div class="form-container">
-    <form class="form" (ngSubmit)="register()">
+    <form class="form" #registerForm="ngForm" (ngSubmit)="register()">
         <h2>Register</h2>
 
         <label for="avatar">Add Profile Avatar</label>
-        <input type="text" name="avatar" id="avatar" [(ngModel)]="avatar" placeholder="URL...">
+        <input type="text" name="avatar" id="avatar" [(ngModel)]="user.avatar" #avatar="ngModel" placeholder="URL..."
+            required pattern="https?://.+">
+        @if (avatar.invalid && avatar.touched) {
+        <div class="error" [ngClass]="{ 'active': avatar.invalid }">
+            @if (avatar.errors?.['required']) {
+            <span>Adding avatar is required!</span>
+            }
+            @if (avatar.errors?.['pattern']) {
+            <span>Avatar must start with http:// or https://!</span>
+            }
+        </div>
+        }
 
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" [(ngModel)]="username">
+        <input type="text" name="username" id="username" [(ngModel)]="user.username" #username="ngModel" required
+            minlength="6">
+        @if (username.invalid && username.touched) {
+        <div class="error" [ngClass]="{ 'active': username.invalid }">
+            @if (username.errors?.['required']) {
+            <span>Username is required!</span>
+            }
+            @if (username.errors?.['minlength']) {
+            <small>Username must be at least 6 characters long!</small>
+            }
+        </div>
+        }
 
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" [(ngModel)]="email">
+        <input type="email" name="email" id="email" [(ngModel)]="user.email" #email="ngModel" required
+            appEmailValidator>
+        @if (email.invalid && email.touched) {
+        <div class="error" [ngClass]="{ 'active': email.invalid }">
+            @if (email.errors?.['required']) {
+            <span>Email is required!</span>
+            }
+            @if (email.errors?.['invalidEmail']) {
+            <span>Email format is invalid!</span>
+            }
+        </div>
+        }
 
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" [(ngModel)]="password">
+        <input type="password" name="password" id="password" [(ngModel)]="user.password" #password="ngModel" required
+            [pattern]="'^[a-zA-Z0-9.]{6,}$'">
+        @if (password.invalid && password.touched) {
+        <div class="error" [ngClass]="{ 'active': email.invalid }">
+            @if (password.errors?.['required']) {
+            <span>Password is required!</span>
+            }
+            @if (password.errors?.['pattern']) {
+            <span>Password must be at least 8 characters long and can contain only letters, numbers, and a dot
+                (.)!</span>
+            }
+        </div>
+        }
 
         <label for="re-password">Repeat Password</label>
-        <input type="password" name="re-password" id="re-password" [(ngModel)]="rePassword">
+        <input type="password" name="re-password" id="re-password" [(ngModel)]="user.rePassword" #rePassword="ngModel"
+            required appMatchPasswords="password">
+        @if (rePassword.invalid && rePassword.touched) {
+        <div class="error" [ngClass]="{ 'active': rePassword.invalid }">
+            @if (rePassword.errors?.['required']) {
+            <small>Repeat Password is required!</small>
+            }
+            @if (rePassword.errors?.['passwordMismatch']) {
+            <small>Password's don't match!</small>
+            }
+        </div>
+        }
 
-        <button type="submit">Submit</button>
+        <button type="submit" [disabled]="registerForm.invalid"
+            [style]="{ backgroundColor: registerForm.invalid ? 'grey' : '#134379'}">Submit</button>
         <p>Already have an account? <a routerLink="/login">Log in</a></p>
     </form>
 </div>
