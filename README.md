@@ -30,6 +30,7 @@
         Create about component and add html/css
         Create home component and add html/css
         Add routes for them
+    Add match passwords and email validator directives
 
 # For the next time:
     error handling
