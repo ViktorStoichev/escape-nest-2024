@@ -3,22 +3,26 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { LoginResponse } from '../../types/login';
 import { FormsModule } from '@angular/forms';
+import { EmailValidatorDirective } from '../../directives/validate-email.directive';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-    email = '';
-    password = '';
+    user = {
+        email: '',
+        password: ''
+    }
   
     constructor(private auth: AuthService, private router: Router) {}
   
     login() {
-      this.auth.login({ email: this.email, password: this.password }).subscribe(
+      this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
         (res: LoginResponse) => {
           this.auth.saveUser(res);
           this.router.navigate(['/home']);
