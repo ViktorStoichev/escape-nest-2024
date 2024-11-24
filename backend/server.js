@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'
 import authController from './controllers/auth-controller.js';
+import postController from './controllers/post-controller.js';
 
 const app = express();
 const PORT = 3000;
@@ -17,5 +18,6 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
 
 app.use('/api/auth', authController);
+app.use('/posts', postController);
 
 app.listen(PORT, () => console.log(`Backend running at http://localhost:${PORT}`));
