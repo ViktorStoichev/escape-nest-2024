@@ -29,12 +29,15 @@
         Add route to the page
         Setup route guard
         Add error handling
-    Create Post service
     Create a home folder
         Create about component and add html/css
         Create home component and add html/css
         Add routes for them
         Add dynamic data
+    Create post folder
+        Add Post service
+        Add all publications list page
+        Add search page
     Add match passwords and email validator directives
 
 # For the next time:
