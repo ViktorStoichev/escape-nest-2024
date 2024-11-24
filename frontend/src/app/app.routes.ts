@@ -4,6 +4,11 @@ import { LoginComponent } from './user/login/login.component';
 import { AboutComponent } from './home/about/about.component';
 import { HomeComponent } from './home/home/home.component';
 import { AuthGuard } from './user/auth.guard';
+import { PublicationsComponent } from './post/publications/publications.component';
+import { AddPostComponent } from './post/add-post/add-post.component';
+import { SearchComponent } from './post/search/search.component';
+import { CurrentPostComponent } from './post/current-post/current-post.component';
+import { EditPostComponent } from './post/edit-post/edit-post.component';
 
 export const routes: Routes = [
     // Home and About routing
@@ -13,5 +18,14 @@ export const routes: Routes = [
 
     // User routing
     { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+
+    // Post routing
+    { path: 'posts', children: [
+        { path: '', component: PublicationsComponent },
+        { path: 'add-post', component: AddPostComponent },
+        { path: 'search', component: SearchComponent },
+        { path: ':postId', component: CurrentPostComponent },
+        { path: ':postId/edit', component: EditPostComponent }
+    ]  }
 ];
