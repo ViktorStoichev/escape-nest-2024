@@ -13,5 +13,5 @@ export interface Post {
 export interface Place {
     imageUrl: string,
     location: string,
-    address: string
+    region: string
 }

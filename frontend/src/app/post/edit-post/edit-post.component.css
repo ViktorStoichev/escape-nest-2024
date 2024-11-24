@@ -1,0 +1,115 @@
+.form-container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.form {
+    background-color: #ffffffAA;
+    border: 2px solid #134379;
+    border-radius: 12px;
+    padding: 30px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.form:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.form h2 {
+    color: #134379;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form input,
+.form textarea {
+    width: 95%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #134379;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #DFEBF4;
+    transition: border-color 0.3s ease;
+}
+
+.form input:focus,
+.form textarea:focus {
+    border-color: #102f57;
+    outline: none;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #134379;
+    font-weight: bold;
+}
+
+.form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #134379;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.form button:hover {
+    background-color: #102f57;
+    transform: translateY(-3px);
+}
+
+.form button:active {
+    transform: translateY(0);
+}
+
+.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.error.active {
+    opacity: 1;
+    transform: scale(1);
+    animation: fadeInScale 0.5s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
