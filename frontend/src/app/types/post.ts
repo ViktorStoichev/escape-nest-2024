@@ -3,6 +3,9 @@ export interface Post {
     place: Place,
     owner: string,
     description: string,
+    comments: [],
+    likes: [],
+    dislikes: [],
     createdAt: string,
     updatedAt: string
 }
