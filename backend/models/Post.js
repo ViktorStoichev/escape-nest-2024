@@ -43,7 +43,11 @@ const postSchema = new Schema({
     dislikes: [{
         type: Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+    owner: {
+        type: Types.ObjectId,
+        ref: 'User'
+    }
 },
     { timestamps: true });
 

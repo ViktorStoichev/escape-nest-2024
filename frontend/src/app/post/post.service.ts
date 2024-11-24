@@ -22,11 +22,11 @@ export class PostService {
         return this.http.get<Post>(`${this.apiUrl}/${id}`);
     }
 
-    createPost(post: { place: { imageUrl: string, location: string, address: string }, owner: string, description: string }): Observable<Post> {
+    createPost(post: { place: { imageUrl: string, location: string, region: string }, owner: string | undefined, description: string }): Observable<Post> {
         return this.http.post<Post>(this.apiUrl, post);
     }
 
-    editPost(id: string, post: { place: { imageUrl: string, location: string, address: string }, owner: string, description: string }): Observable<Post> {
+    editPost(id: string, post: { place: { imageUrl: string, location: string, region: string }, owner: string | undefined, description: string }): Observable<Post> {
         return this.http.post<Post>(`${this.apiUrl}/${id}/edit`, post);
     }
 

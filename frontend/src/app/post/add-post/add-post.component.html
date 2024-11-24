@@ -1,1 +1,51 @@
-<p>add-post works!</p>
+<div class="form-container">
+    <form class="form" #addPostForm="ngForm"
+        (ngSubmit)="onSubmit(addPostForm, $event, imageUrl.value, location.value, region.value, description.value)">
+        <h2>Share an unforgettable experience</h2>
+        <label for="imageUrl">Image URL</label>
+        <input type="text" name="imageUrl" id="imageUrl" placeholder="..." [(ngModel)]="post.imageUrl"
+            #imageUrl="ngModel" required pattern="https?://.+">
+        <div *ngIf="imageUrl.invalid && imageUrl.touched" class="error" [ngClass]="{ 'active': imageUrl.invalid }">
+            @if (imageUrl.errors?.['required']) {
+            <small>Image URL is required!</small>
+            }
+            @if (imageUrl.errors?.['pattern']) {
+            <small>Image URL must start with http:// or https://!</small>
+            }
+        </div>
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" placeholder="..." [(ngModel)]="post.location"
+            #location="ngModel" required minlength="3">
+        <div *ngIf="location.invalid && location.touched" class="error" [ngClass]="{ 'active': location.invalid }">
+            @if (location.errors?.['required']) {
+            <small>Location is required!</small>
+            }
+            @if (location.errors?.['minlength']) {
+            <small>Location must be at least 3 characters long!</small>
+            }
+        </div>
+        <label for="region">Region</label>
+        <input type="text" name="region" id="region" placeholder="..." [(ngModel)]="post.region" #region="ngModel"
+            required minlength="6">
+        <div *ngIf="region.invalid && region.touched" class="error" [ngClass]="{ 'active': region.invalid }">
+            @if (region.errors?.['required']) {
+            <small>Region is required!</small>
+            }
+            @if (region.errors?.['minlength']) {
+            <small>Region must be at least 6 characters long!</small>
+            }
+        </div>
+        <label for="description">Tell us more about it</label>
+        <textarea name="description" id="description" placeholder="..." [(ngModel)]="post.description"
+            #description="ngModel" required minlength="20"></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error" [ngClass]="{ 'active': description.invalid }">
+            @if (description.errors?.['required']) {
+            <small>Description is required!</small>
+            }
+            @if (description.errors?.['minlength']) {
+            <small>Description must be at least 20 characters long!</small>
+            }
+        </div>
+        <button type="submit" [disabled]="addPostForm.invalid" [style]="{ backgroundColor: addPostForm.invalid ? 'grey' : '#134379'}">Post</button>
+    </form>
+</div>

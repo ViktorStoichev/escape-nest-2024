@@ -21,11 +21,11 @@ export class AuthService {
         return this.http.post<LoginResponse>(`${this.apiUrl}/login`, user);
     }
 
-    saveUser(user: { avatar: string, username: string; email: string }): void {
+    saveUser(user: { _id: string, avatar: string, username: string; email: string }): void {
         localStorage.setItem('user', JSON.stringify(user));
     }
 
-    getUser(): { avatar: string, username: string; email: string } | null {
+    getUser(): { _id: string, avatar: string, username: string; email: string } | null {
         const user = localStorage.getItem('user');
         return user ? JSON.parse(user) : null;
     }

@@ -38,6 +38,8 @@
         Add Post service
         Add all publications list page
         Add search page
+        Add create post page
+        Add edit page
     Add match passwords and email validator directives
 
 # For the next time:

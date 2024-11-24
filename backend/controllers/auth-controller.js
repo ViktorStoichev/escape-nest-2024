@@ -19,7 +19,7 @@ authController.post('/login', async (req, res) => {
         const user = await User.findOne({ email, password });
         if (!user) return res.status(404).json({ error: 'Invalid email or password!' });
 
-        res.json({ avatar: user.avatar, username: user.username, email: user.email });
+        res.json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
     } catch (error) {
         res.status(500).json({ error: 'Login failed!' });
     }
