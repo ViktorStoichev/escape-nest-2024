@@ -1,0 +1,156 @@
+
+.post-details-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    margin: 50px 0;
+    gap: 30px;
+}
+
+.post-details-container,
+.comments-container {
+    width: 100%;
+    max-width: 700px;
+    min-height: 820px;
+    max-height: 820px;
+    padding: 50px;
+    border: 2px solid #134379;
+    border-radius: 20px;
+    background-color: #DFEBF4AA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.post-details-container:hover,
+.comments-container:hover {
+    transform: scale(1.05);
+}
+
+.comments-list {
+    width: 100%;
+    border: 1px solid #134379;
+    background-color: #DFEBF4FF;
+    border-radius: 20px;
+    height: 520px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #134379;
+    margin-bottom: 10px;
+}
+
+.comment p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.add-comment {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.add-comment textarea {
+    width: 80%;
+    height: 100px;
+    border-radius: 10px;
+    border: 1px solid #134379;
+    padding: 10px;
+}
+
+.add-comment button {
+    width: 15%;
+    background-color: #134379;
+    height: 100%;
+    color: #DFEBF4;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.add-comment button:hover {
+    opacity: 0.8;
+}
+
+.add-comment button:active {
+    opacity: 0.4;
+}
+
+.image {
+    width: 100%;
+    min-width: 700px;
+    max-width: 700px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.post-title {
+    text-align: center;
+    color: #134379;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.post-content h3,
+.post-content p {
+    font-size: 20px;
+    margin: 0;
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+}
+
+.post-content h3 {
+    font-size: 24px;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #134379;
+    color: #DFEBF4;
+    border-radius: 20px;
+    width: 120px;
+    height: 45px;
+    font-family: bold;
+    font-size: 20px;
+    margin: 0 10px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.4;
+}
+
+.details-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
