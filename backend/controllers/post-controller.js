@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { Post } from '../models/Post.js';
 
 const postController = Router();
 
@@ -26,7 +27,6 @@ postController.post('/', async (req, res) => {
         res.status(201).json(newPost);
     } catch (error) {
         if (error.name === 'ValidationError') {
-            // Send the first validation error as a single message
             return res.status(400).json({ error: Object.values(error.errors)[0].message });
         }
         res.status(500).json({ error: 'An unexpected error occurred' });

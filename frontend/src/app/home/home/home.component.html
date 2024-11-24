@@ -1,4 +1,27 @@
 <div class="main-container">
-    <h1>A haven where time whispers and nature sings. Here, dreams unfold beneath open skies,
-         and every moment feels like a gentle embrace and  where every getaway feels like a return to home.</h1>
+    @if (isLoading) {
+    <app-loader />
+    }@else {
+    <h1>A haven where time whispers and nature sings. Here, dreams unfold beneath open skies, and every moment feels like a gentle embrace and  where every getaway feels like a return to home.</h1>
+    <div class="recent-posts">
+        <h2>Recent Posts:</h2>
+    </div>
+    <main>
+        @for (post of posts; track $index) {
+        <div class="post-container">
+            <div class="image">
+                <img src="{{post.place.imageUrl}}" alt="{{post.place.location}}">
+            </div>
+            <div class="post-content">
+                <h3>{{post.place.location}}</h3>
+                <p>By: <strong>Ime nqma</strong></p>
+                <p>Posted on: <strong>{{formatDate(post.createdAt)}}</strong></p>
+            </div>
+            <div class="details-button">
+                <button routerLink="/posts/{{post._id}}">Details</button>
+            </div>
+        </div>
+        }
+    </main>
+    }
 </div>
