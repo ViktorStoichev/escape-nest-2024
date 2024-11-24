@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { LoginResponse } from '../../types/login';
 import { FormsModule } from '@angular/forms';
-import { EmailValidatorDirective } from '../../directives/validate-email.directive';
+import { EmailValidatorDirective } from '../../error/directives/validate-email.directive';
 import { CommonModule } from '@angular/common';
 
 @Component({

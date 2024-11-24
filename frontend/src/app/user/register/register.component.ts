@@ -4,8 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { RegisterResponse } from '../../types/register';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatchPasswordsDirective } from '../../directives/match-passwords.directive';
-import { EmailValidatorDirective } from '../../directives/validate-email.directive';
+import { MatchPasswordsDirective } from '../../error/directives/match-passwords.directive';
+import { EmailValidatorDirective } from '../../error/directives/validate-email.directive';
 
 @Component({
     selector: 'app-register',

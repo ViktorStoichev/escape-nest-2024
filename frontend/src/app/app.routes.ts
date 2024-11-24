@@ -9,6 +9,7 @@ import { AddPostComponent } from './post/add-post/add-post.component';
 import { SearchComponent } from './post/search/search.component';
 import { CurrentPostComponent } from './post/current-post/current-post.component';
 import { EditPostComponent } from './post/edit-post/edit-post.component';
+import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     // Home and About routing
@@ -27,5 +28,8 @@ export const routes: Routes = [
         { path: 'search', component: SearchComponent },
         { path: ':postId', component: CurrentPostComponent },
         { path: ':postId/edit', component: EditPostComponent }
-    ]  }
+    ]  },
+
+    { path: '404', component: PageNotFoundComponent },
+    { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
