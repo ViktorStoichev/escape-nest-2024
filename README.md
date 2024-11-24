@@ -9,6 +9,8 @@
     Add User mongoose model
     Add auth controller
     Make register and login requests
+    Add Posts mongoose model
+    Add post controller and add CRUD operations
 
 # FrontEnd
     Create FrontEnd folder 
@@ -26,6 +28,7 @@
         Create login component and add html/css
         Add route to the page
         Setup route guard
+        Add error handling
     Create a home folder
         Create about component and add html/css
         Create home component and add html/css
