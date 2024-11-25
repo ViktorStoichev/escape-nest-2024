@@ -10,6 +10,8 @@ import { SearchComponent } from './post/search/search.component';
 import { CurrentPostComponent } from './post/current-post/current-post.component';
 import { EditPostComponent } from './post/edit-post/edit-post.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { GuestGuard } from './user/guest.guard';
 
 export const routes: Routes = [
     // Home and About routing
@@ -18,8 +20,9 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
 
     // User routing
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent, canActivate: [GuestGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 
     // Post routing
     { path: 'posts', children: [

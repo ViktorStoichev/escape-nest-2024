@@ -27,7 +27,7 @@
         Add functionality to register component
         Create login component and add html/css
         Add route to the page
-        Setup route guard
+        Setup route authentication guard and guest guard
         Add error handling
     Create a home folder
         Create about component and add html/css

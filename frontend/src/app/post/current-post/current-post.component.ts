@@ -21,11 +21,13 @@ export class CurrentPostComponent {
     user: LoginResponse | null = null
     owner: LoginResponse | null = null
     isOwner: boolean = false;
+    hasUser: boolean = false;
 
     constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
 
     ngOnInit(): void {
         this.user = this.authService.getUser();
+        this.user ? this.hasUser = true : this.hasUser = false;
         const id = this.activatedRoute.snapshot.params['postId'];
         this.getPost(id);
     }

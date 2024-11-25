@@ -19,6 +19,7 @@
                     </div>
                 </div>
                 <div class="details-button">
+                @if (hasUser) {
                     @if (isOwner) {
                         <button routerLink="/posts/{{post._id}}/edit">Edit</button>
                         <button (click)="deletePost()">Delete</button>
@@ -26,6 +27,7 @@
                         <button routerLink="/posts">Comment</button>
                         <button routerLink="/posts">Like</button>
                     }
+                }
                 </div>
             </div>
         </main>
