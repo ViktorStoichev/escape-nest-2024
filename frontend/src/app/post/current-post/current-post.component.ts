@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
+import { LoginResponse } from '../../types/login';
+import { AuthService } from '../../user/auth.service';
 
 @Component({
   selector: 'app-current-post',
@@ -16,17 +18,21 @@ export class CurrentPostComponent {
     post: Post | null = null;
     isLoading = true;
     // newComment: string = '';
+    user: LoginResponse | null = null
+    isOwner: boolean = false;
 
-    constructor(private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
+    constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
 
     ngOnInit(): void {
+        this.user = this.authService.getUser();
         const id = this.activatedRoute.snapshot.params['postId'];
         this.getPost(id);
     }
-
+    
     getPost(id: string) {
         this.postService.getSinglePost(id).subscribe((data) => {
             this.post = data;
+            this.isOwner = this.user?._id == this.post.owner;
             this.isLoading = false;
         })
     }
@@ -53,6 +59,6 @@ export class CurrentPostComponent {
     // }
 
     formatDate(date: string) {
-        this.datePipe.transform(date, 'short');
+        return this.datePipe.transform(date, 'short');
     }
 }
