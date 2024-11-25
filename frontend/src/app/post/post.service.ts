@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../types/post';
+import { LoginResponse } from '../types/login';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PostService {
         return this.http.get<Post>(`${this.apiUrl}/${id}`);
     }
 
-    createPost(post: { place: { imageUrl: string, location: string, region: string }, owner: string | undefined, description: string }): Observable<Post> {
+    createPost(post: { place: { imageUrl: string, location: string, region: string }, owner: {}, description: string }): Observable<Post> {
         return this.http.post<Post>(this.apiUrl, post);
     }
 

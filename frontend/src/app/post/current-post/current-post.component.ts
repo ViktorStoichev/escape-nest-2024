@@ -19,6 +19,7 @@ export class CurrentPostComponent {
     isLoading = true;
     // newComment: string = '';
     user: LoginResponse | null = null
+    owner: LoginResponse | null = null
     isOwner: boolean = false;
 
     constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
@@ -32,7 +33,10 @@ export class CurrentPostComponent {
     getPost(id: string) {
         this.postService.getSinglePost(id).subscribe((data) => {
             this.post = data;
-            this.isOwner = this.user?._id == this.post.owner;
+            if (this.user?._id == this.post.owner._id) {
+                this.isOwner = true;
+                this.owner = this.user;
+            }
             this.isLoading = false;
         })
     }

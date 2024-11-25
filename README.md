@@ -40,6 +40,8 @@
         Add search page
         Add create post page
         Add edit page
+        Add details page
+            Check if user is owner
     Add match passwords and email validator directives
 
 # For the next time:

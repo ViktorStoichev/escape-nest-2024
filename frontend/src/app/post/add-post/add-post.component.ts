@@ -8,11 +8,11 @@ import { LoginResponse } from '../../types/login';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-add-post',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './add-post.component.html',
-  styleUrl: './add-post.component.css'
+    selector: 'app-add-post',
+    standalone: true,
+    imports: [FormsModule, CommonModule],
+    templateUrl: './add-post.component.html',
+    styleUrl: './add-post.component.css'
 })
 export class AddPostComponent {
     post = {
@@ -24,8 +24,8 @@ export class AddPostComponent {
     user: LoginResponse | null = null
 
     constructor(private authService: AuthService, private postService: PostService, private router: Router) { }
-    
-    
+
+
     onSubmit(form: NgForm, event: Event, imageUrl: string, location: string, region: string, description: string) {
         this.user = this.authService.getUser();
         event.preventDefault();
@@ -36,7 +36,9 @@ export class AddPostComponent {
             console.error('Form is invalid!');
         }
 
-        this.postService.createPost({ place: { imageUrl, location, region }, owner: this.user?._id, description }).subscribe({
+        this.postService.createPost({ place:
+             { imageUrl, location, region }, owner: { _id: this.user?._id, avatar: this.user?.avatar, username: this.user?.username }, description }
+            ).subscribe({
             next: (response: Post) => {
                 console.log('Data added successfully:', response);
                 this.router.navigate(['/posts']);

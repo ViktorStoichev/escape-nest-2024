@@ -45,8 +45,11 @@ const postSchema = new Schema({
         ref: 'User'
     }],
     owner: {
-        type: Types.ObjectId,
-        ref: 'User'
+        type: {
+            _id: { type: Types.ObjectId, ref: 'User'},
+            avatar: { type: String },
+            username: { type: String },
+        } 
     }
 },
     { timestamps: true });

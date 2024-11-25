@@ -1,7 +1,7 @@
 export interface Post {
     _id: string,
     place: Place,
-    owner: string,
+    owner: Owner,
     description: string,
     comments: [],
     likes: [],
@@ -14,4 +14,10 @@ export interface Place {
     imageUrl: string,
     location: string,
     region: string
+}
+
+export interface Owner {
+    _id: string,
+    avatar: string,
+    username: string
 }
