@@ -21,6 +21,16 @@ postController.get('/', async (req, res) => {
     }
 });
 
+postController.get('/:userId/userPosts', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const posts = await Post.find({ 'owner._id': userId });
+        res.json(posts)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 postController.post('/', async (req, res) => {
     try {
         const newPost = await Post.create(req.body);
@@ -33,7 +43,7 @@ postController.post('/', async (req, res) => {
     }
 });
 
-postController.get('/:postId', async (req, res) => {
+postController.get('/:postId/details', async (req, res) => {
     const id = req.params.postId;
     const currentPost = await Post.findById(id);
     res.status(201).json(currentPost);

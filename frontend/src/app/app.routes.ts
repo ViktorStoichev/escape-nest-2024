@@ -16,7 +16,7 @@ import { GuestGuard } from './user/guest.guard';
 export const routes: Routes = [
     // Home and About routing
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
 
     // User routing
@@ -26,9 +26,9 @@ export const routes: Routes = [
 
     // Post routing
     { path: 'posts', children: [
-        { path: '', component: PublicationsComponent },
+        { path: '', component: PublicationsComponent, canActivate: [AuthGuard] },
         { path: 'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
-        { path: 'search', component: SearchComponent },
+        { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
         { path: ':postId', component: CurrentPostComponent },
         { path: ':postId/edit', component: EditPostComponent, canActivate: [AuthGuard] }
     ]  },

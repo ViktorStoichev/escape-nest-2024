@@ -18,8 +18,12 @@ export class PostService {
         return this.http.get<Post[]>(this.apiUrl);
     }
 
-    getSinglePost(id: string): Observable<Post> {
-        return this.http.get<Post>(`${this.apiUrl}/${id}`);
+    getUserPosts(userId: string): Observable<Post[]> {
+        return this.http.get<Post[]>(`${this.apiUrl}/${userId}/userPosts`);
+    }
+
+    getSinglePost(postId: string): Observable<Post> {
+        return this.http.get<Post>(`${this.apiUrl}/${postId}/details`);
     }
 
     createPost(post: { place: { imageUrl: string, location: string, region: string }, owner: {}, description: string }): Observable<Post> {

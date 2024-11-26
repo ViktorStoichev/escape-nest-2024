@@ -3,4 +3,6 @@ export interface LoginResponse {
     avatar: string,
     username: string,
     email: string,
+    createdAt: string,
+    updatedAt: string,
 }

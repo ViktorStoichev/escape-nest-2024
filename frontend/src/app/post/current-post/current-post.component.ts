@@ -36,6 +36,7 @@ export class CurrentPostComponent {
     getPost(id: string) {
         this.postService.getSinglePost(id).subscribe((data) => {
             this.post = data;
+            console.log(this.post);
             if (this.user?._id == this.post.owner._id) {
                 this.isOwner = true;
                 this.owner = this.user;

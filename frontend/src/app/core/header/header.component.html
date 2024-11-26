@@ -17,9 +17,11 @@
 
     <nav class="main-links">
         <a routerLink="/home">Home</a>
+        @if (isLoggedIn()) {
         <a routerLink="/posts">Publications</a>
         <a routerLink="/posts/search">Search</a>
         <a routerLink="/posts/add-post">Share</a>
+        }
         <a routerLink="/about">About</a>
     </nav>
 </header>

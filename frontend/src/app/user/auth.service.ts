@@ -25,7 +25,7 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(user));
     }
 
-    getUser(): { _id: string, avatar: string, username: string; email: string } | null {
+    getUser(): { _id: string, avatar: string, username: string; email: string, createdAt: string, updatedAt: string } | null {
         const user = localStorage.getItem('user');
         return user ? JSON.parse(user) : null;
     }
