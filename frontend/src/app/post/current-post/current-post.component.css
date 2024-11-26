@@ -45,14 +45,25 @@
 }
 
 .comment {
+    display: flex;
+    gap: 20px;
     padding: 10px;
     border-bottom: 1px solid #134379;
     margin-bottom: 10px;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .comment p {
     font-size: 16px;
     margin: 0;
+    margin-top: 20px;
+}
+
+.comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
 }
 
 .add-comment {

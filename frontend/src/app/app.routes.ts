@@ -27,10 +27,10 @@ export const routes: Routes = [
     // Post routing
     { path: 'posts', children: [
         { path: '', component: PublicationsComponent },
-        { path: 'add-post', component: AddPostComponent },
+        { path: 'add-post', component: AddPostComponent, canActivate: [AuthGuard] },
         { path: 'search', component: SearchComponent },
         { path: ':postId', component: CurrentPostComponent },
-        { path: ':postId/edit', component: EditPostComponent }
+        { path: ':postId/edit', component: EditPostComponent, canActivate: [AuthGuard] }
     ]  },
 
     { path: '404', component: PageNotFoundComponent },

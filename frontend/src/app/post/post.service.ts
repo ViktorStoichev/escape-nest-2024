@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../types/post';
-import { LoginResponse } from '../types/login';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,11 @@ export class PostService {
         return this.http.post<Post>(`${this.apiUrl}/${id}/edit`, post);
     }
 
-    deletePost(id: string): Observable<any> {
+    deletePost(id: string): Observable<any> { // Change any
         return this.http.delete(`${this.apiUrl}/${id}`);
+    }
+
+    addComment(id: string, comment: {avatar: string, username: string, text: string}): Observable<Comment> {
+        return this.http.post<Comment>(`${this.apiUrl}/${id}/comments`, comment);
     }
 }

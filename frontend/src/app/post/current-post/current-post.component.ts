@@ -6,18 +6,19 @@ import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
 import { LoginResponse } from '../../types/login';
 import { AuthService } from '../../user/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-current-post',
   standalone: true,
-  imports: [LoaderComponent, RouterLink],
+  imports: [LoaderComponent, RouterLink, FormsModule],
   templateUrl: './current-post.component.html',
   styleUrl: './current-post.component.css'
 })
 export class CurrentPostComponent {
     post: Post | null = null;
     isLoading = true;
-    // newComment: string = '';
+    newComment: string = '';
     user: LoginResponse | null = null
     owner: LoginResponse | null = null
     isOwner: boolean = false;
@@ -40,7 +41,7 @@ export class CurrentPostComponent {
                 this.owner = this.user;
             }
             this.isLoading = false;
-        })
+        });
     }
 
     deletePost() {
@@ -54,15 +55,28 @@ export class CurrentPostComponent {
         this.router.navigate(['/posts']);
     }
 
-    // addComment() {
-    //     if (this.newComment.trim()) {
-    //         this.post?.comments.push({
-    //             username: 'User', // Replace with the actual username
-    //             content: this.newComment,
-    //         });
-    //         this.newComment = ''; // Clear the input field
-    //     }
-    // }
+    isPosting: boolean = false;
+
+    addComment() {
+        if (this.newComment.trim()) {
+            this.isPosting = true;
+            const id = this.activatedRoute.snapshot.params['postId'];
+            if (this.user) {
+                this.postService.addComment( id, { avatar: this.user.avatar, username: this.user.username, text: this.newComment }).subscribe({
+                    next: (response) => { 
+                        this.newComment = '';
+                        this.isPosting = false;
+                        this.getPost(id)
+                    },
+                    error: (error) => {
+                        console.error('Error posting comment:', error)
+                        this.isPosting = false;
+                    }
+                        
+                });
+            }
+        }
+    }
 
     formatDate(date: string) {
         return this.datePipe.transform(date, 'short');

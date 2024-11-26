@@ -10,7 +10,7 @@ postController.get('/', async (req, res) => {
         let posts;
 
         if (!isNaN(limit) && limit > 0) {
-            posts = await Post.find().sort({ createdAt: -1 }).limit(limit);
+            posts = await Post.find().sort({ updatedAt: -1 }).limit(limit);
         } else {
             posts = await Post.find();
         }
@@ -56,6 +56,27 @@ postController.delete('/:postId', async (req, res) => {
         res.status(200).json({ message: 'Item deleted successfully', item: deletedItem });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting item', error });
+    }
+});
+
+postController.get('/:postId/comments', async (req, res) => {
+    try {
+        const id = req.params.postId;
+        const post = await Post.findById(id).select('comments').lean();
+        res.json(post.comments);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+postController.post('/:postId/comments', async (req, res) => {
+    try {
+        const { avatar, username, text } = req.body;
+        const id = req.params.postId;
+        const updatedComment = await Post.findByIdAndUpdate(id, { $push: { comments: { avatar, username, text }}}, { new: true });
+        res.status(201).json(updatedComment);
+    } catch (error) {
+        console.log(error);
     }
 });
 
