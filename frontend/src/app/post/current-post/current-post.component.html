@@ -14,6 +14,8 @@
                     <div class="profile"><img src="{{ post.owner.avatar }}" alt="{{ post.owner.username }}">
                         <p>By: <strong>{{ post.owner.username }}</strong></p>
                     </div>
+                    <p>Likes: <strong>{{ post.likes.length }}</strong></p>
+                    <p>Dislikes: <strong>{{ post.dislikes.length }}</strong></p>
                     <p>Posted on: <strong>{{ formatDate(post.updatedAt) }}</strong></p>
                     <p>Where to find: <strong>{{ post.place.region }}</strong></p>
                     <div class="description">
@@ -26,8 +28,16 @@
                     <button routerLink="/posts/{{post._id}}/edit">Edit</button>
                     <button (click)="deletePost()">Delete</button>
                     }@else {
-                    <button routerLink="/posts">Like</button>
-                    <button routerLink="/posts">Dislike</button>
+                    @if (user) {
+                        @if (post.likes.includes(user._id)) {
+                            <button (click)="likePost()" disabled style="background-color: gray;">Liked</button>
+                        } @else if (post.dislikes.includes(user._id)) {
+                            <button (click)="dislikePost()" disabled style="background-color: gray;">Disliked</button>
+                        } @else {
+                            <button (click)="likePost()">Like</button>
+                            <button (click)="dislikePost()">Dislike</button>
+                        }
+                    }
                     }
                     }
                 </div>

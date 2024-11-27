@@ -83,10 +83,32 @@ postController.post('/:postId/comments', async (req, res) => {
     try {
         const { avatar, username, text } = req.body;
         const id = req.params.postId;
-        const updatedComment = await Post.findByIdAndUpdate(id, { $push: { comments: { avatar, username, text }}}, { new: true });
+        const updatedComment = await Post.findByIdAndUpdate(id, { $push: { comments: { avatar, username, text } } }, { new: true });
         res.status(201).json(updatedComment);
     } catch (error) {
         console.log(error);
+    }
+});
+
+postController.put('/:postId/like', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const postId = req.params.postId;
+        const liked = await Post.findByIdAndUpdate(postId, { $push: { likes: userId } }, { new: true} );
+        res.status(201).json(liked)
+    } catch (error) {
+
+    }
+});
+
+postController.put('/:postId/dislike', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const postId = req.params.postId;
+        const disliked = await Post.findByIdAndUpdate(postId, { $push: { dislikes: userId } }, { new: true} );
+        res.status(201).json(disliked)
+    } catch (error) {
+
     }
 });
 

@@ -79,6 +79,28 @@ export class CurrentPostComponent {
         }
     }
 
+    likePost(): void {
+        if (this.post && this.user) {
+            const userId = this.user._id
+            if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
+                this.postService.like(this.post._id, userId).subscribe((updatedPost) => {
+                  this.post = updatedPost;
+                });
+            }
+        }
+    }
+
+    dislikePost(): void {
+        if (this.post && this.user) {
+            const userId = this.user._id
+            if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
+                this.postService.dislike(this.post._id, userId).subscribe((updatedPost) => {
+                  this.post = updatedPost;
+                });
+            }
+        }
+    }
+
     formatDate(date: string) {
         return this.datePipe.transform(date, 'short');
     }

@@ -45,4 +45,4 @@
     Add match passwords and email validator directives
 
 # For the next time:
-    comment functionality fix
+    like/ dislike

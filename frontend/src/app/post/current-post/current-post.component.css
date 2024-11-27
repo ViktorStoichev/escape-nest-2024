@@ -104,7 +104,7 @@
     width: 100%;
     min-width: 700px;
     max-width: 700px;
-    height: 450px;
+    height: 300px;
     margin-bottom: 20px;
 }
 
@@ -172,7 +172,7 @@ button:active {
 }
 
 .profile img {
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }

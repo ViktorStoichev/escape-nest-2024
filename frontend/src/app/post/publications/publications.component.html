@@ -14,7 +14,9 @@
             </div>
             <div class="post-content">
                 <h3>{{post.place.location}}</h3>
-                <p>By: <strong>Nqma ime</strong></p>
+                <div class="profile">
+                    <img src="{{ post.owner.avatar }}" alt="{{ post.owner.username }}"> <strong>{{ post.owner.username }}</strong>
+                </div>
                 <p>Posted on: <strong>{{formatDate(post.createdAt)}}</strong></p>
             </div>
             <div class="details-button">

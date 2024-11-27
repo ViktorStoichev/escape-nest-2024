@@ -10,7 +10,6 @@ import { SearchComponent } from './post/search/search.component';
 import { CurrentPostComponent } from './post/current-post/current-post.component';
 import { EditPostComponent } from './post/edit-post/edit-post.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
-import { ProfileComponent } from './user/profile/profile.component';
 import { GuestGuard } from './user/guest.guard';
 
 export const routes: Routes = [
@@ -22,7 +21,7 @@ export const routes: Routes = [
     // User routing
     { path: 'register', component: RegisterComponent, canActivate: [GuestGuard] },
     { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'profile', loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent) },
 
     // Post routing
     { path: 'posts', children: [

@@ -7,3 +7,9 @@ export interface RegisterResponse {
         email: string;
     };
 }
+
+export interface UserProfile {
+    avatar: string,
+    username: string,
+    email: string
+}

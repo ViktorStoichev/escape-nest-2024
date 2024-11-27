@@ -25,4 +25,15 @@ authController.post('/login', async (req, res) => {
     }
 });
 
+authController.put('/:userId/edit-profile', async (req, res) => {
+    try {
+        const id = req.params.userId;
+        const { avatar, username, email } = req.body;
+        const updatedProfile = await User.findByIdAndUpdate(id, { avatar, username, email }, { new: true });
+        res.status(201).json(updatedProfile);
+    } catch (error) {
+        
+    }
+});
+
 export default authController;

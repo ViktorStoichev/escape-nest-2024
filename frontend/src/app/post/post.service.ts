@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../types/post';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PostService {
     private apiUrl = 'http://localhost:3000/posts'
@@ -38,7 +38,15 @@ export class PostService {
         return this.http.delete(`${this.apiUrl}/${id}`);
     }
 
-    addComment(id: string, comment: {avatar: string, username: string, text: string}): Observable<Comment> {
+    addComment(id: string, comment: { avatar: string, username: string, text: string }): Observable<Comment> {
         return this.http.post<Comment>(`${this.apiUrl}/${id}/comments`, comment);
+    }
+
+    like(postId: string, userId: string): Observable<Post> {
+        return this.http.put<Post>(`${this.apiUrl}/${postId}/like`, { userId });
+    }
+
+    dislike(postId: string, userId: string): Observable<Post> {
+        return this.http.put<Post>(`${this.apiUrl}/${postId}/dislike`, { userId });
     }
 }

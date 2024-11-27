@@ -6,8 +6,8 @@ export interface Post {
     comments: [
         { avatar: string | undefined, username: string | undefined, text: string }
     ],
-    likes: [],
-    dislikes: [],
+    likes: string[],
+    dislikes: string[],
     createdAt: string,
     updatedAt: string
 }
