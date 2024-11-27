@@ -171,6 +171,10 @@ button:active {
     max-height: 130px;
 }
 
+.profile:hover {
+    cursor: pointer;
+}
+
 .profile img {
     width: 70px;
     height: 70px;

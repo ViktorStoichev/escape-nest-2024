@@ -1,0 +1,37 @@
+<div class="profile-container">
+    @if (isLoading) {
+    <app-loader />
+    } @else {
+    <div class="profile-header">
+        @if (user) {
+        <div class="profile-info">
+            <img src="{{ user.avatar }}" alt="{{ user.username }}" class="profile-avatar" />
+            <h2>{{ user.username }}</h2>
+            <p>{{ user.email }}</p>
+            <p>Joined on: <strong>{{ formatDate(user.createdAt) }}</strong></p>
+        </div>
+        }
+    </div>
+
+    <div class="publications-section">
+        <h1>{{ user?.username }}'s Publications</h1>
+        <main>
+            @for (post of userPosts; track $index) {
+            <div class="post-container">
+                <div class="image">
+                    <img src="{{post.place.imageUrl}}" alt="{{post.place.location}}">
+                </div>
+                <div class="post-content">
+                    <h3>{{post.place.location}}</h3>
+                    <p>By: <strong>{{ post.owner.username }}</strong></p>
+                    <p>Posted on: <strong>{{ formatDate(post.createdAt) }}</strong></p>
+                </div>
+                <div class="details-button">
+                    <button routerLink="/posts/{{post._id}}">Details</button>
+                </div>
+            </div>
+            }
+        </main>
+    </div>
+    }
+</div>

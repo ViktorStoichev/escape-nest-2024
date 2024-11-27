@@ -22,6 +22,7 @@ export const routes: Routes = [
     { path: 'register', loadComponent: () => import('./user/register/register.component').then((c) => c.RegisterComponent), canActivate: [GuestGuard] },
     { path: 'login', loadComponent: () => import('./user/login/login.component').then((c) => c.LoginComponent), canActivate: [GuestGuard] },
     { path: 'profile', loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent), canActivate: [AuthGuard] },
+    { path: 'visit-profile/:userId', loadComponent: () => import('./user/visited-profile/visited-profile.component').then((c) => c.VisitedProfileComponent ) },
 
     // Post routing
     { path: 'posts', children: [

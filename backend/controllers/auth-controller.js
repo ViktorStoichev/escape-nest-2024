@@ -25,14 +25,13 @@ authController.post('/login', async (req, res) => {
     }
 });
 
-authController.put('/:userId/edit-profile', async (req, res) => {
+authController.get('/visit-profile/:userId', async (req, res) => {
     try {
-        const id = req.params.userId;
-        const { avatar, username, email } = req.body;
-        const updatedProfile = await User.findByIdAndUpdate(id, { avatar, username, email }, { new: true });
-        res.status(201).json(updatedProfile);
+        const userId = req.params.userId;
+        const user = await User.findById(userId);
+        res.status(201).json(user);
     } catch (error) {
-        
+        console.log(error);
     }
 });
 

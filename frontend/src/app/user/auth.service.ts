@@ -30,6 +30,10 @@ export class AuthService {
         return user ? JSON.parse(user) : null;
     }
 
+    visitUser(userId: string): Observable<LoginResponse> {
+        return this.http.get<LoginResponse>(`${this.apiUrl}/visit-profile/${userId}`);
+    }
+
     logout(): void {
         localStorage.removeItem('user');
         this.router.navigate(['/login']);

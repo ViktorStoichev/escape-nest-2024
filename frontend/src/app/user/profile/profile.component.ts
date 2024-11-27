@@ -27,12 +27,10 @@ export class ProfileComponent {
     }
   
     loadUserProfile(): void {
-      // Replace with actual logic to get user profile data
       this.user = this.authService.getUser();
     }
   
     loadUserPosts(): void {
-      // Replace with actual logic to get user's posts
       if (this.user) {
           this.postService.getUserPosts(this.user?._id).subscribe((data) => {
             console.log(data);
