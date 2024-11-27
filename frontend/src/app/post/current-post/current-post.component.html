@@ -56,14 +56,16 @@
             </div>
             }
         </div>
-        <div class="add-comment">
-            <!-- <textarea placeholder="Add a comment..."></textarea>
-            <button >Post Comment</button> -->
-            <textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
-            <button (click)="addComment()" [disabled]="!newComment || isPosting"
-                [style]="{ backgroundColor: (!newComment || isPosting) ? 'grey' : '#134379'}">
-                {{ isPosting ? 'Posting...' : 'Post Comment' }}</button>
-        </div>
+        @if (hasUser || isOwner) {
+            <div class="add-comment">
+                <!-- <textarea placeholder="Add a comment..."></textarea>
+                <button >Post Comment</button> -->
+                <textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
+                <button (click)="addComment()" [disabled]="!newComment || isPosting"
+                    [style]="{ backgroundColor: (!newComment || isPosting) ? 'grey' : '#134379'}">
+                    {{ isPosting ? 'Posting...' : 'Post Comment' }}</button>
+            </div>
+        }
     </div>
     }
 </div>
