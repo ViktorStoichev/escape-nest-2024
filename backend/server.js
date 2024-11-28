@@ -18,6 +18,6 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
 
 app.use('/api/auth', authController);
-app.use('/posts', postController);
+app.use('/api/posts', postController);
 
 app.listen(PORT, () => console.log(`Backend running at http://localhost:${PORT}`));

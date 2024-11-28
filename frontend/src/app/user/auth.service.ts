@@ -9,16 +9,15 @@ import { RegisterResponse } from '../types/register';
     providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://localhost:3000/api/auth';
 
     constructor(private http: HttpClient, private router: Router) { }
 
     register(user: { avatar: string, username: string; email: string; password: string }): Observable<RegisterResponse> {
-        return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, user);
+        return this.http.post<RegisterResponse>(`/auth/register`, user);
     }
 
     login(user: { email: string; password: string }) {
-        return this.http.post<LoginResponse>(`${this.apiUrl}/login`, user);
+        return this.http.post<LoginResponse>(`/auth/login`, user);
     }
 
     saveUser(user: { _id: string, avatar: string, username: string; email: string }): void {
@@ -31,7 +30,7 @@ export class AuthService {
     }
 
     visitUser(userId: string): Observable<LoginResponse> {
-        return this.http.get<LoginResponse>(`${this.apiUrl}/visit-profile/${userId}`);
+        return this.http.get<LoginResponse>(`/auth/visit-profile/${userId}`);
     }
 
     logout(): void {

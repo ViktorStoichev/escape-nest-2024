@@ -7,46 +7,45 @@ import { Post } from '../types/post';
     providedIn: 'root'
 })
 export class PostService {
-    private apiUrl = 'http://localhost:3000/posts'
 
     constructor(private http: HttpClient) { }
 
     getPosts(limit?: number): Observable<Post[]> {
         if (limit) {
-            return this.http.get<Post[]>(`${this.apiUrl}?limit=${limit}`);
+            return this.http.get<Post[]>(`/posts?limit=${limit}`);
         }
-        return this.http.get<Post[]>(this.apiUrl);
+        return this.http.get<Post[]>('/posts');
     }
 
     getUserPosts(userId: string): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.apiUrl}/${userId}/userPosts`);
+        return this.http.get<Post[]>(`/posts/${userId}/userPosts`);
     }
 
     getSinglePost(postId: string): Observable<Post> {
-        return this.http.get<Post>(`${this.apiUrl}/${postId}/details`);
+        return this.http.get<Post>(`/posts/${postId}/details`);
     }
 
     createPost(post: { place: { imageUrl: string, location: string, region: string }, owner: {}, description: string }): Observable<Post> {
-        return this.http.post<Post>(this.apiUrl, post);
+        return this.http.post<Post>('/posts', post);
     }
 
     editPost(id: string, post: { place: { imageUrl: string, location: string, region: string }, description: string }): Observable<Post> {
-        return this.http.post<Post>(`${this.apiUrl}/${id}/edit`, post);
+        return this.http.post<Post>(`/posts/${id}/edit`, post);
     }
 
-    deletePost(id: string): Observable<any> { // Change any
-        return this.http.delete(`${this.apiUrl}/${id}`);
+    deletePost(id: string): Observable<Post> { // Change any
+        return this.http.delete<Post>(`/posts/${id}`);
     }
 
     addComment(id: string, comment: { avatar: string, username: string, text: string }): Observable<Comment> {
-        return this.http.post<Comment>(`${this.apiUrl}/${id}/comments`, comment);
+        return this.http.post<Comment>(`/posts/${id}/comments`, comment);
     }
 
     like(postId: string, userId: string): Observable<Post> {
-        return this.http.put<Post>(`${this.apiUrl}/${postId}/like`, { userId });
+        return this.http.put<Post>(`/posts/${postId}/like`, { userId });
     }
 
     dislike(postId: string, userId: string): Observable<Post> {
-        return this.http.put<Post>(`${this.apiUrl}/${postId}/dislike`, { userId });
+        return this.http.put<Post>(`/posts/${postId}/dislike`, { userId });
     }
 }
