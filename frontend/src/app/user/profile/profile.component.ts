@@ -7,11 +7,10 @@ import { LoginResponse } from '../../types/login';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [LoaderComponent, RouterLink],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+    selector: 'app-profile',
+    imports: [LoaderComponent, RouterLink],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
     user: LoginResponse | null = null;

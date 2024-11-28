@@ -7,11 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [LoaderComponent, FormsModule, RouterLink, CommonModule],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+    selector: 'app-search',
+    imports: [LoaderComponent, FormsModule, RouterLink, CommonModule],
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css'
 })
 export class SearchComponent {
     posts: Post[] = [];

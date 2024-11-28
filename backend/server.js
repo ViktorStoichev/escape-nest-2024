@@ -4,6 +4,7 @@ import cors from 'cors'
 import authController from './controllers/auth-controller.js';
 import postController from './controllers/post-controller.js';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 mongoose.connect(process.env.MONGO_URI);
 

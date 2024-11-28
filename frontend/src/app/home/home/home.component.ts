@@ -6,11 +6,10 @@ import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink, LoaderComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [RouterLink, LoaderComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent {
     posts: Post[] = [];

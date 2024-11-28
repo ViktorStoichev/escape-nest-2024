@@ -6,11 +6,10 @@ import { RouterLink } from '@angular/router';
 import { LoaderComponent } from "../../global/loader/loader.component";
 
 @Component({
-  selector: 'app-publications',
-  standalone: true,
-  imports: [RouterLink, LoaderComponent],
-  templateUrl: './publications.component.html',
-  styleUrl: './publications.component.css'
+    selector: 'app-publications',
+    imports: [RouterLink, LoaderComponent],
+    templateUrl: './publications.component.html',
+    styleUrl: './publications.component.css'
 })
 export class PublicationsComponent {
     posts: Post[] = [];

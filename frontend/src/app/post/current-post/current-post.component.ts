@@ -9,11 +9,10 @@ import { AuthService } from '../../user/auth.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-current-post',
-  standalone: true,
-  imports: [LoaderComponent, RouterLink, FormsModule],
-  templateUrl: './current-post.component.html',
-  styleUrl: './current-post.component.css'
+    selector: 'app-current-post',
+    imports: [LoaderComponent, RouterLink, FormsModule],
+    templateUrl: './current-post.component.html',
+    styleUrl: './current-post.component.css'
 })
 export class CurrentPostComponent {
     post: Post | null = null;

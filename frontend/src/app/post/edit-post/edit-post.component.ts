@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from "../../global/loader/loader.component";
 
 @Component({
-  selector: 'app-edit-post',
-  standalone: true,
-  imports: [FormsModule, CommonModule, LoaderComponent],
-  templateUrl: './edit-post.component.html',
-  styleUrl: './edit-post.component.css'
+    selector: 'app-edit-post',
+    imports: [FormsModule, CommonModule, LoaderComponent],
+    templateUrl: './edit-post.component.html',
+    styleUrl: './edit-post.component.css'
 })
 export class EditPostComponent {
     data: Post | null = null;

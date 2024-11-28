@@ -7,19 +7,11 @@ export interface User {
     updatedAt: string;
 }
 
-export interface RegisterData {
-    username: string;
-    email: string;
-    password: string;
-}
-
-export interface LoginData {
-    email: string;
-    password: string;
-}
-
-export interface AuthResponse {
-    token: string;
+export interface LoginRegisterResponse {
     user: User;
-    message: string;
+    token: string;
+}
+
+export interface UserDataResponse {
+    user: User;
 }

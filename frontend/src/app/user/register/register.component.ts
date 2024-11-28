@@ -9,7 +9,6 @@ import { EmailValidatorDirective } from '../../error/directives/validate-email.d
 
 @Component({
     selector: 'app-register',
-    standalone: true,
     imports: [RouterLink, FormsModule, CommonModule, MatchPasswordsDirective, EmailValidatorDirective],
     templateUrl: './register.component.html',
     styleUrl: './register.component.css'

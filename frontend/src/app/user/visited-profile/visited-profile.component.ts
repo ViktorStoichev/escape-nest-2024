@@ -7,11 +7,10 @@ import { AuthService } from '../auth.service';
 import { LoginResponse } from '../../types/login';
 
 @Component({
-  selector: 'app-visited-profile',
-  standalone: true,
-  imports: [LoaderComponent, RouterLink],
-  templateUrl: './visited-profile.component.html',
-  styleUrl: './visited-profile.component.css'
+    selector: 'app-visited-profile',
+    imports: [LoaderComponent, RouterLink],
+    templateUrl: './visited-profile.component.html',
+    styleUrl: './visited-profile.component.css'
 })
 export class VisitedProfileComponent implements OnInit {
     user: LoginResponse | null = null;

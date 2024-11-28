@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-add-post',
-    standalone: true,
     imports: [FormsModule, CommonModule],
     templateUrl: './add-post.component.html',
     styleUrl: './add-post.component.css'
