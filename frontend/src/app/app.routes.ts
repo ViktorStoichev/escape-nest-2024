@@ -19,18 +19,18 @@ export const routes: Routes = [
     { path: 'about', loadComponent: () => import('./home/about/about.component').then((c) => c.AboutComponent) },
 
     // User routing
-    { path: 'register', loadComponent: () => import('./user/register/register.component').then((c) => c.RegisterComponent), canActivate: [GuestGuard] },
-    { path: 'login', loadComponent: () => import('./user/login/login.component').then((c) => c.LoginComponent), canActivate: [GuestGuard] },
-    { path: 'profile', loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent), canActivate: [AuthGuard] },
+    { path: 'register', loadComponent: () => import('./user/register/register.component').then((c) => c.RegisterComponent) },
+    { path: 'login', loadComponent: () => import('./user/login/login.component').then((c) => c.LoginComponent) },
+    { path: 'profile', loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent) },
     { path: 'visit-profile/:userId', loadComponent: () => import('./user/visited-profile/visited-profile.component').then((c) => c.VisitedProfileComponent ) },
 
     // Post routing
     { path: 'posts', children: [
-        { path: '', loadComponent: () => import('./post/publications/publications.component').then((c) => c.PublicationsComponent), canActivate: [AuthGuard] },
-        { path: 'add-post', loadComponent: () => import('./post/add-post/add-post.component').then((c) => c.AddPostComponent), canActivate: [AuthGuard] },
-        { path: 'search', loadComponent: () => import('./post/search/search.component').then((c) => c.SearchComponent), canActivate: [AuthGuard] },
+        { path: '', loadComponent: () => import('./post/publications/publications.component').then((c) => c.PublicationsComponent) },
+        { path: 'add-post', loadComponent: () => import('./post/add-post/add-post.component').then((c) => c.AddPostComponent) },
+        { path: 'search', loadComponent: () => import('./post/search/search.component').then((c) => c.SearchComponent) },
         { path: ':postId', loadComponent: () => import('./post/current-post/current-post.component').then((c) => c.CurrentPostComponent) },
-        { path: ':postId/edit', loadComponent: () => import('./post/edit-post/edit-post.component').then((c) => c.EditPostComponent), canActivate: [AuthGuard] }
+        { path: ':postId/edit', loadComponent: () => import('./post/edit-post/edit-post.component').then((c) => c.EditPostComponent) }
     ]  },
 
     { path: '404', loadComponent: () => import('./error/page-not-found/page-not-found.component').then((c) => c.PageNotFoundComponent) },

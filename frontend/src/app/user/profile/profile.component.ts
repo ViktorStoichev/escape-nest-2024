@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
-import { LoaderComponent } from "../../global/loader/loader.component";
 import { AuthService } from '../auth.service';
 import { PostService } from '../../post/post.service';
 import { Post } from '../../types/post';
-import { LoginResponse } from '../../types/login';
 import { RouterLink } from '@angular/router';
+import { LoaderComponent } from '../../global/loader/loader.component';
+import { UserDataResponse } from '../../types/user';
 
 @Component({
     selector: 'app-profile',
     imports: [LoaderComponent, RouterLink],
+    standalone: true,
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-    user: LoginResponse | null = null;
+    user: UserDataResponse | null = null;
     userPosts: Post[] = [];
     isLoading: boolean = true;
   
@@ -21,17 +22,20 @@ export class ProfileComponent {
   
     ngOnInit(): void {
       this.loadUserProfile();
-      this.loadUserPosts();
-      this.isLoading = false
     }
   
     loadUserProfile(): void {
-      this.user = this.authService.getUser();
+      this.authService.getUserData().subscribe((data) => {
+        this.user = data;
+        console.log(this.user);
+        this.loadUserPosts();
+        this.isLoading = false
+      });
     }
   
     loadUserPosts(): void {
       if (this.user) {
-          this.postService.getUserPosts(this.user?._id).subscribe((data) => {
+          this.postService.getUserPosts(this.user._id).subscribe((data) => {
             console.log(data);
             this.userPosts = data;
           });
@@ -43,6 +47,13 @@ export class ProfileComponent {
     }
   
     logout(): void {
-      this.authService.logout();
+        this.authService.logout().subscribe(
+            () => {
+                console.log('Logged out');
+            },
+            error => {
+                console.error('Logout failed', error);
+            }
+        );
     }
 }

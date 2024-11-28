@@ -1,44 +1,67 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../types/login';
-import { Observable } from 'rxjs';
-import { RegisterResponse } from '../types/register';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserDataResponse } from '../types/user';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
-    constructor(private http: HttpClient, private router: Router) { }
-
-    register(user: { avatar: string, username: string; email: string; password: string }): Observable<RegisterResponse> {
-        return this.http.post<RegisterResponse>(`/auth/register`, user);
+    constructor(private http: HttpClient, private router: Router) {
+        this.checkLoggedIn();
     }
 
-    login(user: { email: string; password: string }) {
-        return this.http.post<LoginResponse>(`/auth/login`, user);
+    private checkLoggedIn() {
+        this.http.get(`/auth/me`).subscribe(
+          () => {
+            this.isLoggedInSubject.next(true);
+          },
+          () => {
+            this.isLoggedInSubject.next(false);
+          }
+        );
+      }
+
+    register(user: { avatar: string, username: string; email: string; password: string }): Observable<UserDataResponse> {
+        return this.http.post<UserDataResponse>(`/auth/register`, user).pipe(
+            tap(() => {
+              this.isLoggedInSubject.next(true);
+              this.router.navigate(['/home']);
+            })
+          );
     }
 
-    saveUser(user: { _id: string, avatar: string, username: string; email: string }): void {
-        localStorage.setItem('user', JSON.stringify(user));
+    login(user: { email: string; password: string }): Observable<UserDataResponse> {
+        return this.http.post<UserDataResponse>(`/auth/login`, user).pipe(
+            tap(() => {
+              this.isLoggedInSubject.next(true);
+              this.router.navigate(['/home']);
+            })
+          );
     }
 
-    getUser(): { _id: string, avatar: string, username: string; email: string, createdAt: string, updatedAt: string } | null {
-        const user = localStorage.getItem('user');
-        return user ? JSON.parse(user) : null;
+    visitUser(userId: string): Observable<UserDataResponse> {
+        return this.http.get<UserDataResponse>(`/auth/visit-profile/${userId}`);
     }
 
-    visitUser(userId: string): Observable<LoginResponse> {
-        return this.http.get<LoginResponse>(`/auth/visit-profile/${userId}`);
+    getUserData(): Observable<UserDataResponse> {
+        return this.http.get<UserDataResponse>(`/auth/me`);
     }
 
-    logout(): void {
-        localStorage.removeItem('user');
-        this.router.navigate(['/login']);
+    logout(): Observable<void> {
+        return this.http.post<void>(`/auth/logout`, {}).pipe(
+            tap(() => {
+              this.isLoggedInSubject.next(false);
+              this.router.navigate(['/login']);
+            })
+          );
     }
 
-    isLoggedIn(): boolean {
-        return !!localStorage.getItem('user');
+    isLoggedIn(): Observable<boolean> {
+        return this.isLoggedInSubject.asObservable();
     }
 }

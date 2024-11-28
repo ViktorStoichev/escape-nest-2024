@@ -5,23 +5,24 @@
         </div>
 
         <div class="user-links">
-            @if (!isLoggedIn()) {
-            <a routerLink="/login">Login</a>
-            <a routerLink="/register">Register</a>
-            }@else {
-            <a routerLink="/profile">Profile</a>
-            <a (click)="logout()">Logout</a>
-            }
+            <ng-container *ngIf="(isLoggedIn$ | async); else guestLinks">
+                <a routerLink="/profile">Profile</a>
+                <a (click)="logout()">Logout</a>
+            </ng-container>
+            <ng-template #guestLinks>
+                <a routerLink="/login">Login</a>
+                <a routerLink="/register">Register</a>
+            </ng-template>
         </div>
     </div>
 
     <nav class="main-links">
         <a routerLink="/home">Home</a>
-        @if (isLoggedIn()) {
-        <a routerLink="/posts">Publications</a>
-        <a routerLink="/posts/search">Search</a>
-        <a routerLink="/posts/add-post">Share</a>
-        }
+        <ng-container *ngIf="(isLoggedIn$ | async)">
+            <a routerLink="/posts">Publications</a>
+            <a routerLink="/posts/search">Search</a>
+            <a routerLink="/posts/add-post">Share</a>
+        </ng-container>
         <a routerLink="/about">About</a>
     </nav>
 </header>

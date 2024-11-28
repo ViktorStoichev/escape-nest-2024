@@ -39,7 +39,7 @@ To install and run **Escape Nest** locally, follow these steps:
 3. Initialize the backend project and install dependencies:
    ```bash
    npm init -y
-   npm install express mongoose cors bcrypt jsonwebtoken dotenv
+   npm install express mongoose cors bcrypt jsonwebtoken dotenv cookie-parser
    ```
 
 4. Navigate to the `frontend` directory:

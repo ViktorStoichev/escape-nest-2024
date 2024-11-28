@@ -8,6 +8,7 @@ import { LoaderComponent } from "../../global/loader/loader.component";
 @Component({
     selector: 'app-home',
     imports: [RouterLink, LoaderComponent],
+    standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'
 })

@@ -1,28 +1,32 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../user/auth.service';
+import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-header',
-    imports: [RouterLink],
+    imports: [RouterLink, CommonModule],
+    standalone: true,
     templateUrl: './header.component.html',
     styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-    user: { username: string; email: string } | null = null;
+    isLoggedIn$: Observable<boolean>;
 
-    constructor(private auth: AuthService, private router: Router) {}
-  
-    ngOnInit(): void {
-      this.user = this.auth.getUser();
-    }
-  
+    constructor(private auth: AuthService) {
+        this.isLoggedIn$ = this.auth.isLoggedIn();
+        console.log(this.isLoggedIn$);
+     }
+
     logout(): void {
-      this.auth.logout();
-      this.router.navigate(['/login']);
-    }
-
-    isLoggedIn(): boolean {
-      return this.auth.isLoggedIn();
+        this.auth.logout().subscribe(
+            () => {
+                console.log('Logged out');
+            },
+            error => {
+                console.error('Logout failed', error);
+            }
+        );
     }
 }

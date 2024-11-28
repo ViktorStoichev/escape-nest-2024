@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { PostService } from '../post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../types/post';
-import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from "../../global/loader/loader.component";
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-edit-post',
     imports: [FormsModule, CommonModule, LoaderComponent],
+    standalone: true,
     templateUrl: './edit-post.component.html',
     styleUrl: './edit-post.component.css'
 })

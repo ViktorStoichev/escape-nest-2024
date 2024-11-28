@@ -4,13 +4,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
-import { LoginResponse } from '../../types/login';
 import { AuthService } from '../../user/auth.service';
 import { FormsModule } from '@angular/forms';
+import { UserDataResponse } from '../../types/user';
 
 @Component({
     selector: 'app-current-post',
     imports: [LoaderComponent, RouterLink, FormsModule],
+    standalone: true,
     templateUrl: './current-post.component.html',
     styleUrl: './current-post.component.css'
 })
@@ -18,18 +19,20 @@ export class CurrentPostComponent {
     post: Post | null = null;
     isLoading = true;
     newComment: string = '';
-    user: LoginResponse | null = null
-    owner: LoginResponse | null = null
+    user: UserDataResponse | null = null
+    owner: UserDataResponse | null = null
     isOwner: boolean = false;
     hasUser: boolean = false;
 
     constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
 
     ngOnInit(): void {
-        this.user = this.authService.getUser();
-        this.user ? this.hasUser = true : this.hasUser = false;
-        const id = this.activatedRoute.snapshot.params['postId'];
-        this.getPost(id);
+        this.authService.getUserData().subscribe((data) => {
+            this.user = data;
+            this.user ? this.hasUser = true : this.hasUser = false;
+            const id = this.activatedRoute.snapshot.params['postId'];
+            this.getPost(id);
+        })
     }
     
     getPost(id: string) {
