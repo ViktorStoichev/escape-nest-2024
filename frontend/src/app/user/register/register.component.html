@@ -22,14 +22,14 @@
 
         <label for="username">Username</label>
         <input type="text" name="username" id="username" [(ngModel)]="user.username" #username="ngModel" required
-            minlength="6">
+            minlength="4">
         @if (username.invalid && username.touched) {
         <div class="error" [ngClass]="{ 'active': username.invalid }">
             @if (username.errors?.['required']) {
             <span>Username is required!</span>
             }
             @if (username.errors?.['minlength']) {
-            <small>Username must be at least 6 characters long!</small>
+            <small>Username must be at least 4 characters long!</small>
             }
         </div>
         }
