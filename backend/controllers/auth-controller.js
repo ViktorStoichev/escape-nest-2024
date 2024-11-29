@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { User } from "../models/User.js";
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import { env } from "../environments.js";
 
-dotenv.config();
+
 const authController = Router();
 
 const verifyToken = (req, res, next) => {
@@ -32,7 +32,7 @@ authController.post('/register', async (req, res) => {
         const user = new User({ avatar, username, email, password });
         await user.save();
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+        const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
         res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
 
         res.status(201).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
@@ -55,7 +55,7 @@ authController.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Wrong email or password' });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+        const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
         res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
 
         res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
