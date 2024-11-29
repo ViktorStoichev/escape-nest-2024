@@ -25,7 +25,6 @@ export class LoginComponent {
     login() {
         this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
             (res: UserDataResponse) => {
-                console.log('Logged in');
                 this.errorMsg = '';
                 this.router.navigate(['/home']);
             },

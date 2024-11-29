@@ -16,17 +16,9 @@ export class HeaderComponent {
 
     constructor(private auth: AuthService) {
         this.isLoggedIn$ = this.auth.isLoggedIn();
-        console.log(this.isLoggedIn$);
      }
 
     logout(): void {
-        this.auth.logout().subscribe(
-            () => {
-                console.log('Logged out');
-            },
-            error => {
-                console.error('Logout failed', error);
-            }
-        );
+        this.auth.logout().subscribe();
     }
 }

@@ -44,7 +44,6 @@ export class EditPostComponent {
         const id = this.activatedRoute.snapshot.params['postId']
         this.postService.editPost(id, {place: {imageUrl, location, region}, description}).subscribe({
             next: (response) => {
-                console.log('Data added successfully:', response);
                 this.router.navigate([`/posts/${id}`]);
               },
               error: (error) => {

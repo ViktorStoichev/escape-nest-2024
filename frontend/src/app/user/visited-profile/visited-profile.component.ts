@@ -35,7 +35,6 @@ export class VisitedProfileComponent implements OnInit {
     loadUserPosts(): void {
         if (this.user) {
             this.postService.getUserPosts(this.user?._id).subscribe((data) => {
-              console.log(data);
               this.userPosts = data;
             });
         }

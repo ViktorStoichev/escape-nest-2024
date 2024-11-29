@@ -31,22 +31,15 @@ export class CurrentPostComponent {
             (response) => {
                 this.user = response;
                 this.hasUser = true;
-                console.log(this.user, this.hasUser);
                 const id = this.activatedRoute.snapshot.params['postId'];
                 this.getPost(id);
             },
             (error) => {
                 this.hasUser = false;
-                console.log(this.hasUser);
                 const id = this.activatedRoute.snapshot.params['postId'];
                 this.getPost(id);
             }
         )
-        // this.user = data;
-        // this.user ? this.hasUser = true : this.hasUser = false;
-        // console.log(this.hasUser, this.user);
-        // const id = this.activatedRoute.snapshot.params['postId'];
-        // this.getPost(id);
     }
 
     getPost(id: string) {
@@ -64,7 +57,6 @@ export class CurrentPostComponent {
         const id: string = this.activatedRoute.snapshot.params['postId'];
         this.postService.deletePost(id).subscribe({
             next: (response) => {
-                console.log(response);
             },
             error: (error) => console.error(error),
         });;

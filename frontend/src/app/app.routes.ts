@@ -5,8 +5,8 @@ import { GuestGuard } from './user/guest.guard';
 export const routes: Routes = [
     // Home and About routing
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', loadComponent: () => import('./home/home/home.component').then((c) => c.HomeComponent) },
-    { path: 'about', loadComponent: () => import('./home/about/about.component').then((c) => c.AboutComponent) },
+    { path: 'home', loadComponent: () => import('./main/home/home.component').then((c) => c.HomeComponent) },
+    { path: 'about', loadComponent: () => import('./main/about/about.component').then((c) => c.AboutComponent) },
 
     // User routing
     { path: 'register', loadComponent: () => import('./user/register/register.component').then((c) => c.RegisterComponent), canActivate: [GuestGuard] },

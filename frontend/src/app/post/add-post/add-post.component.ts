@@ -29,20 +29,12 @@ export class AddPostComponent {
     onSubmit(form: NgForm, event: Event, imageUrl: string, location: string, region: string, description: string) {
         event.preventDefault();
         
-        if (form.valid) {
-            console.log('Form submitted:', this.post);
-        } else {
-            console.error('Form is invalid!');
-        }
         this.authService.getUserData().subscribe((data) => {
             this.user = data;
-            console.log(this.user);
             this.postService.createPost({ place:
                 { imageUrl, location, region }, owner: { _id: this.user?._id, avatar: this.user?.avatar, username: this.user?.username }, description }
                ).subscribe({
                next: (response: Post) => {
-                   console.log(this.user?._id);
-                   console.log('Data added successfully:', response);
                    this.router.navigate(['/posts']);
                },
                error: (errorMessage: string) => {

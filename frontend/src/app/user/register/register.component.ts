@@ -30,7 +30,6 @@ export class RegisterComponent {
     register() {
         this.auth.register({ avatar: this.user.avatar, username: this.user.username, email: this.user.email, password: this.user.password }).subscribe(
             (res: UserDataResponse) => {
-                console.log('Registration successful!');
                 this.errorMsg = '';
                 this.router.navigate(['/home']);
             },

@@ -27,7 +27,6 @@ export class ProfileComponent {
     loadUserProfile(): void {
       this.authService.getUserData().subscribe((data) => {
         this.user = data;
-        console.log(this.user);
         this.loadUserPosts();
         this.isLoading = false
       });
@@ -36,7 +35,6 @@ export class ProfileComponent {
     loadUserPosts(): void {
       if (this.user) {
           this.postService.getUserPosts(this.user._id).subscribe((data) => {
-            console.log(data);
             this.userPosts = data;
           });
       }
@@ -49,7 +47,6 @@ export class ProfileComponent {
     logout(): void {
         this.authService.logout().subscribe(
             () => {
-                console.log('Logged out');
             },
             error => {
                 console.error('Logout failed', error);
