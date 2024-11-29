@@ -35,7 +35,7 @@ authController.post('/register', async (req, res) => {
         const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
         res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
 
-        res.status(201).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
+        res.status(201).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email, createdAt: user.createdAt });
     } catch (error) {
         res.status(500).json({ message: 'Error registering user', error });
     }
@@ -58,7 +58,7 @@ authController.post('/login', async (req, res) => {
         const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
         res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
 
-        res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
+        res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email, createdAt: user.createdAt });
     } catch (error) {
         res.status(500).json({ message: 'Error logging in', error });
     }
@@ -75,7 +75,7 @@ authController.get('/me', verifyToken, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email });
+        res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email, createdAt: user.createdAt });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching user data', error });
     }

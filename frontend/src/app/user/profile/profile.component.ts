@@ -17,33 +17,33 @@ export class ProfileComponent {
     user: UserDataResponse | null = null;
     userPosts: Post[] = [];
     isLoading: boolean = true;
-  
-    constructor( private authService: AuthService, private postService: PostService) {}
-  
+
+    constructor(private authService: AuthService, private postService: PostService) { }
+
     ngOnInit(): void {
-      this.loadUserProfile();
+        this.loadUserProfile();
     }
-  
+
     loadUserProfile(): void {
-      this.authService.getUserData().subscribe((data) => {
-        this.user = data;
-        this.loadUserPosts();
-        this.isLoading = false
-      });
+        this.authService.getUserData().subscribe((data) => {
+            this.user = data;
+            this.loadUserPosts();
+            this.isLoading = false
+        });
     }
-  
+
     loadUserPosts(): void {
-      if (this.user) {
-          this.postService.getUserPosts(this.user._id).subscribe((data) => {
-            this.userPosts = data;
-          });
-      }
+        if (this.user) {
+            this.postService.getUserPosts(this.user._id).subscribe((data) => {
+                this.userPosts = data;
+            });
+        }
     }
-  
+
     formatDate(date: string): string {
-      return new Date(date).toLocaleDateString();
+        return new Date(date).toLocaleDateString();
     }
-  
+
     logout(): void {
         this.authService.logout().subscribe(
             () => {
