@@ -9,6 +9,7 @@ import { UserDataResponse } from '../../types/user';
 @Component({
     selector: 'app-visited-profile',
     imports: [LoaderComponent, RouterLink],
+    standalone: true,
     templateUrl: './visited-profile.component.html',
     styleUrl: './visited-profile.component.css'
 })
