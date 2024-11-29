@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { CanActivate, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GuestGuard implements CanActivate {
+export class UserGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.authService.isLoggedIn().pipe(
       map((isLoggedIn) => {
-        if (isLoggedIn) {
+        if (!isLoggedIn) {
           this.router.navigate(['/404']);
         }
-        return !isLoggedIn;
+        return isLoggedIn;
       })
     );
   }
+  
 }

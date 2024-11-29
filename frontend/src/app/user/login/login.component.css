@@ -123,3 +123,37 @@ p {
         transform: scale(1);
     }
 }
+
+.error-toast {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 28px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 5s ease-in-out forwards;
+    z-index: 1000;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

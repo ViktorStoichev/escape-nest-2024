@@ -5,10 +5,11 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { LoaderComponent } from "../../global/loader/loader.component";
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SlicePipe } from '../../global/pipes/slice.pipe';
 
 @Component({
     selector: 'app-search',
-    imports: [LoaderComponent, FormsModule, RouterLink, CommonModule],
+    imports: [LoaderComponent, FormsModule, RouterLink, CommonModule, SlicePipe],
     standalone: true,
     templateUrl: './search.component.html',
     styleUrl: './search.component.css'

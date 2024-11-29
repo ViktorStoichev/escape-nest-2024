@@ -27,18 +27,31 @@ export class CurrentPostComponent {
     constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
 
     ngOnInit(): void {
-        this.authService.getUserData().subscribe((data) => {
-            this.user = data;
-            this.user ? this.hasUser = true : this.hasUser = false;
-            const id = this.activatedRoute.snapshot.params['postId'];
-            this.getPost(id);
-        })
+        this.authService.getUserData().subscribe(
+            (response) => {
+                this.user = response;
+                this.hasUser = true;
+                console.log(this.user, this.hasUser);
+                const id = this.activatedRoute.snapshot.params['postId'];
+                this.getPost(id);
+            },
+            (error) => {
+                this.hasUser = false;
+                console.log(this.hasUser);
+                const id = this.activatedRoute.snapshot.params['postId'];
+                this.getPost(id);
+            }
+        )
+        // this.user = data;
+        // this.user ? this.hasUser = true : this.hasUser = false;
+        // console.log(this.hasUser, this.user);
+        // const id = this.activatedRoute.snapshot.params['postId'];
+        // this.getPost(id);
     }
-    
+
     getPost(id: string) {
         this.postService.getSinglePost(id).subscribe((data) => {
             this.post = data;
-            console.log(this.post);
             if (this.user?._id == this.post.owner._id) {
                 this.isOwner = true;
                 this.owner = this.user;
@@ -65,8 +78,8 @@ export class CurrentPostComponent {
             this.isPosting = true;
             const id = this.activatedRoute.snapshot.params['postId'];
             if (this.user) {
-                this.postService.addComment( id, { avatar: this.user.avatar, username: this.user.username, text: this.newComment }).subscribe({
-                    next: (response) => { 
+                this.postService.addComment(id, { avatar: this.user.avatar, username: this.user.username, text: this.newComment }).subscribe({
+                    next: (response) => {
                         this.newComment = '';
                         this.isPosting = false;
                         this.getPost(id)
@@ -75,7 +88,7 @@ export class CurrentPostComponent {
                         console.error('Error posting comment:', error)
                         this.isPosting = false;
                     }
-                        
+
                 });
             }
         }
@@ -86,7 +99,7 @@ export class CurrentPostComponent {
             const userId = this.user._id
             if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
                 this.postService.like(this.post._id, userId).subscribe((updatedPost) => {
-                  this.post = updatedPost;
+                    this.post = updatedPost;
                 });
             }
         }
@@ -97,7 +110,7 @@ export class CurrentPostComponent {
             const userId = this.user._id
             if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
                 this.postService.dislike(this.post._id, userId).subscribe((updatedPost) => {
-                  this.post = updatedPost;
+                    this.post = updatedPost;
                 });
             }
         }

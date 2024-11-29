@@ -4,10 +4,11 @@ import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
+import { SlicePipe } from '../../global/pipes/slice.pipe';
 
 @Component({
     selector: 'app-home',
-    imports: [RouterLink, LoaderComponent],
+    imports: [RouterLink, LoaderComponent, SlicePipe],
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'

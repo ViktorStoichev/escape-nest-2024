@@ -3,9 +3,9 @@ import { PostService } from '../post.service';
 import { Router } from '@angular/router';
 import { Post } from '../../types/post';
 import { AuthService } from '../../user/auth.service';
-import { LoginResponse } from '../../types/login';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserDataResponse } from '../../types/user';
 
 @Component({
     selector: 'app-add-post',
@@ -21,7 +21,7 @@ export class AddPostComponent {
         region: '',
         description: '',
     };
-    user: LoginResponse | null = null
+    user: UserDataResponse | null = null
 
     constructor(private authService: AuthService, private postService: PostService, private router: Router) { }
 

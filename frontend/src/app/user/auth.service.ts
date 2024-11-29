@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse } from '../types/login';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserDataResponse } from '../types/user';

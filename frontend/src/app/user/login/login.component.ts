@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { LoginResponse } from '../../types/login';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -18,16 +17,29 @@ export class LoginComponent {
         email: '',
         password: ''
     }
-  
-    constructor(private auth: AuthService, private router: Router) {}
-  
+
+    errorMsg: string = '';
+
+    constructor(private auth: AuthService, private router: Router) { }
+
     login() {
-      this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
-        (res: UserDataResponse) => {
-            console.log('Logged in');
-            this.router.navigate(['/home']);
-        },
-        (err) => alert('Invalid email or password!')
-      );
+        this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
+            (res: UserDataResponse) => {
+                console.log('Logged in');
+                this.errorMsg = '';
+                this.router.navigate(['/home']);
+            },
+            (err) => {
+                this.showError(err.error.message);
+            }
+        );
+    }
+
+    showError(message: string) {
+        this.errorMsg = message;
+
+        setTimeout(() => {
+            this.errorMsg = '';
+        }, 5000);
     }
 }

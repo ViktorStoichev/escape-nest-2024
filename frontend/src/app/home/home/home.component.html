@@ -13,7 +13,7 @@
                 <img src="{{post.place.imageUrl}}" alt="{{post.place.location}}">
             </div>
             <div class="post-content">
-                <h3>{{post.place.location}}</h3>
+                <h3>{{post.place.location | slice: 20 }}</h3>
                 <div routerLink="/visit-profile/{{ post.owner._id }}" class="profile">
                     <img src="{{ post.owner.avatar }}" alt="{{ post.owner.username }}"> <strong>{{ post.owner.username }}</strong>
                 </div>

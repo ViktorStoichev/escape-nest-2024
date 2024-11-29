@@ -9,7 +9,7 @@ const authController = Router();
 const verifyToken = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
-        return res.status(403).json({ message: 'No token provided' });
+        return next();
     }
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -47,12 +47,12 @@ authController.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Wrong email or password' });
         }
 
         const isPasswordValid = await user.comparePassword(password);
         if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Wrong email or password' });
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });

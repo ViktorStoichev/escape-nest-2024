@@ -4,7 +4,7 @@ import { Post } from '../../types/post';
 import { PostService } from '../../post/post.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { LoginResponse } from '../../types/login';
+import { UserDataResponse } from '../../types/user';
 
 @Component({
     selector: 'app-visited-profile',
@@ -13,7 +13,7 @@ import { LoginResponse } from '../../types/login';
     styleUrl: './visited-profile.component.css'
 })
 export class VisitedProfileComponent implements OnInit {
-    user: LoginResponse | null = null;
+    user: UserDataResponse | null = null;
     userPosts: Post[] = [];
     isLoading: boolean = true;
 
