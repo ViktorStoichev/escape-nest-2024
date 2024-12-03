@@ -14,14 +14,16 @@ export class AuthService {
         this.checkLoggedIn();
     }
 
-    private checkLoggedIn() {
-        this.http.get(`/auth/me`).subscribe(
-          () => {
+    public checkLoggedIn(): Observable<boolean> {
+        return this.http.get<UserDataResponse>(`/auth/me`).pipe(
+          map(() => {
             this.isLoggedInSubject.next(true);
-          },
-          () => {
+            return true;
+          }),
+          catchError(() => {
             this.isLoggedInSubject.next(false);
-          }
+            return of(false);
+          })
         );
       }
 

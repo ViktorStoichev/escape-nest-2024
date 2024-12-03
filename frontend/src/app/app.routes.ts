@@ -16,7 +16,7 @@ export const routes: Routes = [
 
     // Post routing
     { path: 'posts', children: [
-        { path: '', loadComponent: () => import('./post/publications/publications.component').then((c) => c.PublicationsComponent), canActivate: [UserGuard] },
+        { path: '', loadComponent: () => import('./post/publications/publications.component').then((c) => c.PublicationsComponent) },
         { path: 'add-post', loadComponent: () => import('./post/add-post/add-post.component').then((c) => c.AddPostComponent), canActivate: [UserGuard] },
         { path: 'search', loadComponent: () => import('./post/search/search.component').then((c) => c.SearchComponent), canActivate: [UserGuard] },
         { path: ':postId', loadComponent: () => import('./post/current-post/current-post.component').then((c) => c.CurrentPostComponent) },

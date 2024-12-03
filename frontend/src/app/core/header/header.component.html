@@ -18,8 +18,8 @@
 
     <nav class="main-links">
         <a routerLink="/home">Home</a>
+        <a routerLink="/posts">Publications</a>
         <ng-container *ngIf="(isLoggedIn$ | async)">
-            <a routerLink="/posts">Publications</a>
             <a routerLink="/posts/search">Search</a>
             <a routerLink="/posts/add-post">Share</a>
         </ng-container>
