@@ -16,6 +16,8 @@ export class HeaderComponent {
 
     constructor(private auth: AuthService) {
         this.isLoggedIn$ = this.auth.isLoggedIn();
+
+        this.auth.checkLoggedIn().subscribe();
      }
 
     logout(): void {
