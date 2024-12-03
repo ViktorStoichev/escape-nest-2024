@@ -35,7 +35,7 @@ h1 {
 
 main {
     width: 100%;
-    max-width: 90%;
+    max-width: 95%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -49,7 +49,7 @@ main {
 .post-container {
     width: 100%;
     height: auto;
-    max-width: 350px;
+    max-width: 300px;
     border: 2px solid #134379;
     overflow: hidden;
     padding: 10px;
@@ -81,7 +81,7 @@ p {
 }
 
 .image {
-    width: 350px;
+    width: 300px;
     height: 200px;
     margin-bottom: 10px;
 }

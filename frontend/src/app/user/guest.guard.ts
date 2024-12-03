@@ -13,7 +13,6 @@ export class GuestGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.authService.checkLoggedIn().pipe(
       map((isLoggedIn) => {
-          console.log('-', isLoggedIn);
         if (isLoggedIn) {
           this.router.navigate(['/404']);
         }

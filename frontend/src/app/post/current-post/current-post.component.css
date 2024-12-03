@@ -13,9 +13,9 @@
 .post-details-container,
 .comments-container {
     width: 100%;
-    max-width: 700px;
-    min-height: 820px;
-    max-height: 820px;
+    max-width: 600px;
+    min-height: 650px;
+    max-height: 650px;
     padding: 50px;
     border: 2px solid #134379;
     border-radius: 20px;
@@ -102,9 +102,9 @@
 
 .image {
     width: 100%;
-    min-width: 700px;
-    max-width: 700px;
-    height: 300px;
+    min-width: 600px;
+    max-width: 600px;
+    height: 200px;
     margin-bottom: 20px;
 }
 
@@ -121,17 +121,12 @@ img {
     margin-bottom: 20px;
 }
 
-.post-content h3,
 .post-content p {
-    font-size: 20px;
+    font-size: 16px;
     margin: 0;
     white-space: normal;
     word-break: break-word;
     overflow: visible;
-}
-
-.post-content h3 {
-    font-size: 24px;
 }
 
 .description {
