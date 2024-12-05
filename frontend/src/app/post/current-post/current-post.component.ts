@@ -57,10 +57,10 @@ export class CurrentPostComponent {
         const id: string = this.activatedRoute.snapshot.params['postId'];
         this.postService.deletePost(id).subscribe({
             next: (response) => {
+                this.router.navigate(['/posts']);
             },
             error: (error) => console.error(error),
         });;
-        this.router.navigate(['/posts']);
     }
 
     isPosting: boolean = false;
