@@ -33,7 +33,7 @@ authController.post('/register', async (req, res) => {
         await user.save();
 
         const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
-        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
+        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', partitioned: true, maxAge: 3600000 });
 
         res.status(201).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email, createdAt: user.createdAt });
     } catch (error) {
@@ -56,7 +56,7 @@ authController.post('/login', async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id }, env.JWT_SECRET, { expiresIn: env.JWT_EXPIRES_IN });
-        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: 3600000 });
+        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', partitioned: true, maxAge: 3600000 });
 
         res.status(200).json({ _id: user._id, avatar: user.avatar, username: user.username, email: user.email, createdAt: user.createdAt });
     } catch (error) {
@@ -65,7 +65,7 @@ authController.post('/login', async (req, res) => {
 });
 
 authController.post('/logout', (req, res) => {
-    res.clearCookie('token', { httpOnly: true, secure: true, sameSite: 'none' });
+    res.clearCookie('token', { httpOnly: true, secure: true, sameSite: 'none', partitioned: true, });
     res.status(200).json({ message: 'Logged out successfully' });
 });
 
