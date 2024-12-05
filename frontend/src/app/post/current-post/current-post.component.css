@@ -1,4 +1,3 @@
-
 .post-details-wrapper {
     display: flex;
     justify-content: center;
@@ -6,8 +5,10 @@
     height: 100vh;
     width: 100%;
     position: relative;
+    height: auto;
     margin: 50px 0;
     gap: 30px;
+    overflow: auto;
 }
 
 .post-details-container,
@@ -16,6 +17,7 @@
     max-width: 600px;
     min-height: 650px;
     max-height: 650px;
+    margin-top: 40px;
     padding: 50px;
     border: 2px solid #134379;
     border-radius: 20px;
@@ -174,4 +176,88 @@ button:active {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .post-details-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+
+    .post-details-container,
+    .comments-container {
+        width: 100%;
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .post-title {
+        font-size: 28px;
+    }
+
+    .comment {
+        gap: 10px;
+    }
+
+    .comment p {
+        font-size: 14px;
+    }
+
+    .add-comment textarea {
+        height: 80px;
+        font-size: 14px;
+    }
+
+    .add-comment button {
+        width: 25%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .image {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .add-comment button {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .post-details-container,
+    .comments-container {
+        width: 100%;
+        max-width: 86%;
+        padding: 20px;
+    }
+
+    .post-title {
+        font-size: 24px;
+    }
+
+    .comment p {
+        font-size: 12px;
+    }
+
+    .add-comment textarea {
+        width: 70%;
+    }
+
+    .add-comment button {
+        width: 30%;
+    }
+
+    .post-details-wrapper {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        overflow-y: auto;
+    }
+
+    .add-comment button {
+        height: 50px;
+    }
 }

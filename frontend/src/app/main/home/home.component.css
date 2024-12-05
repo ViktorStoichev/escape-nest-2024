@@ -33,7 +33,7 @@ main {
     width: 100%;
     max-width: 95%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     place-items: center;
     background-color: #DFEBF480;
@@ -133,4 +133,16 @@ button:active {
     display: flex;
     margin-top: auto;
     justify-content: right;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 30px;
+    }
 }

@@ -13,7 +13,7 @@
                 <div class="post-content">
                     <div routerLink="/visit-profile/{{post.owner._id}}" class="profile"><img src="{{ post.owner.avatar }}" alt="{{ post.owner.username }}">
                         <p>By: <strong>{{ post.owner.username }}</strong></p>
-                    </div> (
+                    </div>
                     <p>Posted on: <strong>{{ formatDate(post.createdAt) }}</strong></p>
                     <p>Where to find: <strong>{{ post.place.region }}</strong></p>
                     <div class="description">
@@ -27,9 +27,8 @@
                     <button (click)="deletePost()">Delete</button>
                     }@else {
                     @if (user) {
-                        @if (post.likes.includes(user._id)) {
+                        @if (post.likes.includes(user._id) || post.dislikes.includes(user._id)) {
                             <button (click)="likePost()" disabled style="background-color: gray;">Liked (<strong>{{ post.likes.length }}</strong>)</button>
-                        } @else if (post.dislikes.includes(user._id)) {
                             <button (click)="dislikePost()" disabled style="background-color: gray;">Disliked (<strong>{{ post.dislikes.length }}</strong>)</button>
                         } @else {
                             <button (click)="likePost()">Like (<strong>{{ post.likes.length }}</strong>)</button>

@@ -1,8 +1,8 @@
 header {
     width: 100%;
-  }
-  
-  .nav-bar {
+}
+
+.nav-bar {
     width: 97.9%;
     background-color: #DFEBF4;
     height: 60px;
@@ -11,34 +11,34 @@ header {
     align-items: center;
     padding: 0 20px;
     margin-bottom: 0;
-  }
-  
-  .title {
+}
+
+.title {
     color: #134379;
-  }
-  
-  .user-links {
+}
+
+.user-links {
     display: flex;
     gap: 20px;
-  }
-  
-  .user-links a {
+}
+
+.user-links a {
     font-size: 30px;
     color: #134379;
     text-decoration: none;
-  }
-  
-  .user-links a:hover {
+}
+
+.user-links a:hover {
     cursor: pointer;
     opacity: 0.8;
-  }
-  
-  .user-links a:active {
+}
+
+.user-links a:active {
     cursor: pointer;
     opacity: 0.4;
-  }
-  
-  .main-links {
+}
+
+.main-links {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -48,21 +48,48 @@ header {
     margin: 0 auto;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-  }
-    
-  .main-links a {
+}
+
+.main-links a {
     font-size: 30px;
     color: #DFEBF4;
     text-decoration: none;
-  }
-  
-  .main-links a:hover {
+}
+
+.main-links a:hover {
     cursor: pointer;
     opacity: 0.8;
-  }
-  
-  .main-links a:active {
+}
+
+.main-links a:active {
     cursor: pointer;
     opacity: 0.4;
-  }
-  
+}
+
+@media (max-width: 768px) {
+
+    .title h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .user-links {
+        padding-right: 24px;
+    }
+
+    .main-links a,
+    .user-links a {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title h1 {
+        font-size: 24px;
+    }
+
+    .user-links a,
+    .main-links a {
+        font-size: 14px;
+    }
+}

@@ -113,3 +113,15 @@ label {
         transform: scale(1);
     }
 }
+
+@media (max-width: 768px) {
+    .form {
+        margin-right: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        margin-right: 40px;
+    }
+}

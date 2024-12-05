@@ -157,3 +157,15 @@ p {
         transform: translateY(-10px);
     }
 }
+
+@media (max-width: 768px) {
+    .form {
+        margin-right: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        margin-right: 40px;
+    }
+}
