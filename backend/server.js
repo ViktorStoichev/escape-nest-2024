@@ -9,7 +9,7 @@ import { env } from './environments.js';
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:4200', 'https://escape-nest-2024-frontend.onrender.com'],
+    origin: ['http://localhost:4200', 'https://flourishing-smakager-8cf897.netlify.app'],
     credentials: true,
   }));
 app.use(express.json());
