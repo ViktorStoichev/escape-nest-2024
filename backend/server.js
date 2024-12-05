@@ -22,6 +22,10 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
 
+app.get('/', (req, res) => {
+    res.send('Server works!')
+});
+
 app.use('/api/auth', authController);
 app.use('/api/posts', postController);
 
