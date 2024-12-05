@@ -50,7 +50,7 @@
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" [(ngModel)]="user.password" #password="ngModel" required
-            [pattern]="'^[a-zA-Z0-9.]{6,}$'">
+            [pattern]="'^[a-zA-Z0-9.]{8,}$'">
         @if (password.invalid && password.touched) {
         <div class="error" [ngClass]="{ 'active': email.invalid }">
             @if (password.errors?.['required']) {

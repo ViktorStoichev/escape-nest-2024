@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
-import { MatchPasswordsDirective } from '../../error/directives/match-passwords.directive';
-import { EmailValidatorDirective } from '../../error/directives/validate-email.directive';
+import { MatchPasswordsDirective } from '../../directives/match-passwords.directive';
+import { EmailValidatorDirective } from '../../directives/validate-email.directive';
 import { UserDataResponse } from '../../types/user';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';

@@ -23,7 +23,7 @@ export class MatchPasswordsDirective implements Validator {
         return { passwordMismatch: true };
       }
   
-      return null; // Valid if no mismatch
+      return null;
     }
 
 }
