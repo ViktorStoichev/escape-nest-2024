@@ -59,10 +59,14 @@ To run the project locally:
 
 2. Open another terminal window, navigate to the `frontend` directory, and start the Angular app:
    ```bash
+   !Required - Go to environments folder and change the api url to http://localhost:3000
    ng serve
    ```
 
 3. Visit `http://localhost:4200` in your browser to access the application.
+
+You can also use it on this url https://flourishing-smakager-8cf897.netlify.app
+    if you don`t want to run it locally
 
 ## Contributing
 
