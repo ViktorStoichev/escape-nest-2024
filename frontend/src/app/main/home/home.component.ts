@@ -24,7 +24,7 @@ export class HomeComponent {
     }
 
     loadRecentPosts() {
-        this.postService.getPosts(4).subscribe((data) => {
+        this.postService.getPosts(5).subscribe((data) => {
             this.posts = data;
             this.isLoading = false;
         })

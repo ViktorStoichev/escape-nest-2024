@@ -66,6 +66,20 @@ header {
     opacity: 0.4;
 }
 
+.main-links a.active-link {
+    padding: 0 10px;
+    border-radius: 20px;
+    background-color: #DFEBF4;
+    color: #134379;
+}
+
+.user-links a.active-link {
+    padding: 0 10px;
+    border-radius: 20px;
+    background-color: #134379;
+    color: #DFEBF4;
+}
+
 @media (max-width: 768px) {
 
     .title h1 {
