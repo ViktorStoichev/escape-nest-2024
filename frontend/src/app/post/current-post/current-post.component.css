@@ -178,6 +178,49 @@ button:active {
     border-radius: 50%;
 }
 
+.reaction-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    font-family: bold;
+    font-size: 16px;
+    color: #DFEBF4;
+    border-radius: 20px;
+    background-color: #134379;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .reaction-button .icon {
+    font-size: 16px;
+  }
+  
+  .reaction-button .count {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  
+  .reaction-button:hover {
+    background-color: #e9ecef;
+    color: #333;
+  }
+  
+  .reaction-button.active {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .like-button.active {
+    background-color: #28a745;
+  }
+  
+  .dislike-button.active {
+    background-color: #dc3545;
+  }
+  
+
 @media (max-width: 768px) {
     .post-details-wrapper {
         flex-direction: column;

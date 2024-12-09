@@ -90,26 +90,35 @@ postController.post('/:postId/comments', async (req, res) => {
     }
 });
 
-postController.put('/:postId/like', async (req, res) => {
+postController.post('/:postId/reaction', async (req, res) => {
+    const { postId } = req.params;
+    const { userId, reaction } = req.body;
+  
     try {
-        const userId = req.body.userId;
-        const postId = req.params.postId;
-        const liked = await Post.findByIdAndUpdate(postId, { $push: { likes: userId } }, { new: true} );
-        res.status(201).json(liked)
+      const post = await Post.findById(postId);
+      if (!post) return res.status(404).json({ message: 'Post not found' });
+  
+      if (reaction === 'like') {
+        if (post.likes.includes(userId)) {
+          post.likes.pull(userId);
+        } else {
+          post.likes.push(userId);
+          post.dislikes.pull(userId);
+        }
+      } else if (reaction === 'dislike') {
+        if (post.dislikes.includes(userId)) {
+          post.dislikes.pull(userId);
+        } else {
+          post.dislikes.push(userId);
+          post.likes.pull(userId);
+        }
+      }
+  
+      await post.save();
+      res.json(post);
     } catch (error) {
-
+      res.status(500).json({ message: error.message });
     }
-});
-
-postController.put('/:postId/dislike', async (req, res) => {
-    try {
-        const userId = req.body.userId;
-        const postId = req.params.postId;
-        const disliked = await Post.findByIdAndUpdate(postId, { $push: { dislikes: userId } }, { new: true} );
-        res.status(201).json(disliked)
-    } catch (error) {
-
-    }
-});
+  });
 
 export default postController;

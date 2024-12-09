@@ -41,11 +41,7 @@ export class PostService {
         return this.http.post<Comment>(`/posts/${id}/comments`, comment);
     }
 
-    like(postId: string, userId: string): Observable<Post> {
-        return this.http.put<Post>(`/posts/${postId}/like`, { userId });
-    }
-
-    dislike(postId: string, userId: string): Observable<Post> {
-        return this.http.put<Post>(`/posts/${postId}/dislike`, { userId });
+    toggleReaction(postId: string, userId: string, reaction: 'like' | 'dislike'): Observable<Post> {
+        return this.http.post<Post>(`/posts/${postId}/reaction`, { userId, reaction });
     }
 }

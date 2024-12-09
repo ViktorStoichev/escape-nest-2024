@@ -27,13 +27,20 @@
                     <button (click)="deletePost()">Delete</button>
                     }@else {
                     @if (user) {
-                        @if (post.likes.includes(user._id) || post.dislikes.includes(user._id)) {
-                            <button (click)="likePost()" disabled style="background-color: gray;">Liked (<strong>{{ post.likes.length }}</strong>)</button>
-                            <button (click)="dislikePost()" disabled style="background-color: gray;">Disliked (<strong>{{ post.dislikes.length }}</strong>)</button>
-                        } @else {
-                            <button (click)="likePost()">Like (<strong>{{ post.likes.length }}</strong>)</button>
-                            <button (click)="dislikePost()">Dislike (<strong>{{ post.dislikes.length }}</strong>)</button>
-                        }
+                        <button
+                        class="reaction-button like-button"
+                        [class.active]="post.likes.includes(user._id)"
+                        (click)="toggleReaction('like')"
+                      >
+                        <span class="icon">👍</span> Like <span class="count">({{ post.likes.length }})</span>
+                      </button>
+                      <button
+                        class="reaction-button dislike-button"
+                        [class.active]="post.dislikes.includes(user._id)"
+                        (click)="toggleReaction('dislike')"
+                      >
+                        <span class="icon">👎</span> Dislike <span class="count">({{ post.dislikes.length }})</span>
+                      </button>
                     }
                     }
                     }

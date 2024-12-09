@@ -86,25 +86,11 @@ export class CurrentPostComponent {
         }
     }
 
-    likePost(): void {
+    toggleReaction(reaction: 'like' | 'dislike'): void {
         if (this.post && this.user) {
-            const userId = this.user._id
-            if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
-                this.postService.like(this.post._id, userId).subscribe((updatedPost) => {
-                    this.post = updatedPost;
-                });
-            }
-        }
-    }
-
-    dislikePost(): void {
-        if (this.post && this.user) {
-            const userId = this.user._id
-            if (!this.post.likes.includes(userId) && !this.post.dislikes.includes(userId)) {
-                this.postService.dislike(this.post._id, userId).subscribe((updatedPost) => {
-                    this.post = updatedPost;
-                });
-            }
+          this.postService.toggleReaction(this.post._id, this.user._id, reaction).subscribe((updatedPost: Post) => {
+            this.post = updatedPost;
+          });
         }
     }
 
