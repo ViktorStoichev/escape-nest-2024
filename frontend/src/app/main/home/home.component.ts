@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PostService } from '../../post/post.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -14,8 +14,8 @@ import { SlicePipe } from '../../global/pipes/slice.pipe';
     styleUrl: './home.component.css'
 })
 export class HomeComponent {
-    posts: Post[] = [];
-    isLoading = true;
+    posts = signal<Post[]>([])
+    isLoading = signal(true);
 
     constructor(private postService: PostService, private datePipe: DatePipe) {}
 
@@ -25,8 +25,8 @@ export class HomeComponent {
 
     loadRecentPosts() {
         this.postService.getPosts(4).subscribe((data) => {
-            this.posts = data;
-            this.isLoading = false;
+            this.posts.set(data);
+            this.isLoading.set(false);
         })
     }
 

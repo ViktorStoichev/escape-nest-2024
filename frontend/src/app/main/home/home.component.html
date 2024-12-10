@@ -1,5 +1,5 @@
 <div class="main-container">
-    @if (isLoading) {
+    @if (isLoading()) {
     <app-loader />
     }@else {
     <h1>A haven where time whispers and nature sings. Here, dreams unfold beneath open skies, and every moment feels like a gentle embrace and  where every getaway feels like a return to home.</h1>
@@ -7,7 +7,7 @@
         <h2>Recent Posts:</h2>
     </div>
     <main>
-        @for (post of posts; track $index) {
+        @for (post of posts(); track $index) {
         <div class="post-container">
             <div class="image">
                 <img src="{{post.place.imageUrl}}" alt="{{post.place.location}}">

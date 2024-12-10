@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../../types/post';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -15,9 +15,9 @@ import { SlicePipe } from '../../global/pipes/slice.pipe';
     styleUrl: './search.component.css'
 })
 export class SearchComponent {
-    posts: Post[] = [];
-    filteredPosts: Post[] = [];
-    isLoading = true;
+    posts = signal<Post[]>([]);
+    filteredPosts = signal<Post[]>([]);
+    isLoading = signal(true);
     searchTerm: string = '';
 
     constructor(public postService: PostService, private datePipe: DatePipe) {}
@@ -28,16 +28,16 @@ export class SearchComponent {
 
     loadPosts() {
         this.postService.getPosts().subscribe((data) => {
-            this.posts = data;
-            this.filteredPosts = data;
-            this.isLoading = false;
+            this.posts.set(data);
+            this.filteredPosts.set(data);
+            this.isLoading.set(false);
         });
     }
 
     filterPosts() {
-        this.filteredPosts = this.posts.filter(post =>
+        this.filteredPosts.set(this.posts().filter(post =>
             post.place.location.toLowerCase().includes(this.searchTerm.toLowerCase())
-        );
+        ));
     }
 
     formatDate(date: string) {

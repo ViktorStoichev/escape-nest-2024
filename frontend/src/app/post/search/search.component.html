@@ -1,5 +1,5 @@
 <div class="main-container">
-    @if (isLoading) {
+    @if (isLoading()) {
         <app-loader />
     }
     <input
@@ -12,12 +12,12 @@
 
     <h1>Feel free to browse through all publications</h1>
 
-    <p *ngIf="filteredPosts.length === 0" class="no-posts-message">
+    <p *ngIf="filteredPosts().length === 0" class="no-posts-message">
         No posts found for your search criteria.
     </p>
     
     <main [ngClass]="{ 'no-posts': filteredPosts.length === 0 }">
-        <div *ngFor="let post of filteredPosts;" class="post-container">
+        <div *ngFor="let post of filteredPosts();" class="post-container">
             <div class="image">
                 <img [src]="post.place.imageUrl" alt="{{ post.place.location }}" />
             </div>

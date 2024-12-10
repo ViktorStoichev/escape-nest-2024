@@ -1,10 +1,10 @@
 <div class="main-container">
-    @if (isLoading) {
+    @if (isLoading()) {
     <app-loader />
     }@else {
     <h1>Feel free to browse through all publications</h1>
     <main>
-        @for (post of posts; track $index) {
+        @for (post of posts(); track $index) {
         <div class="post-container">
             <div class="image">
                 <img src="{{post.place.imageUrl}}" alt="{{post.place.location}}">

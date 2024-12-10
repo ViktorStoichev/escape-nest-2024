@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PostService } from '../post.service';
 import { DatePipe } from '@angular/common';
 import { Post } from '../../types/post';
@@ -14,8 +14,8 @@ import { SlicePipe } from '../../global/pipes/slice.pipe';
     styleUrl: './publications.component.css'
 })
 export class PublicationsComponent {
-    posts: Post[] = [];
-    isLoading = true;
+    posts = signal<Post[]>([]);
+    isLoading = signal(true);
 
     constructor(public postService: PostService, private datePipe: DatePipe) {}
 
@@ -25,8 +25,8 @@ export class PublicationsComponent {
 
     loadPosts() {
         this.postService.getPosts().subscribe((data) => {
-            this.posts = data;
-            this.isLoading = false;
+            this.posts.set(data);
+            this.isLoading.set(false);
         });
     }
 
