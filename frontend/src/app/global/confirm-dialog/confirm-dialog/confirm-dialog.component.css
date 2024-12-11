@@ -1,0 +1,66 @@
+.custom-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-dialog-container {
+    background-color: #DFEBF4AA;
+    border: 2px solid #134379;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-dialog-container h1 {
+    font-size: 24px;
+    color: #134379;
+    margin-bottom: 20px;
+}
+
+.custom-dialog-container p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.custom-dialog-container .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.custom-dialog-container button {
+    background-color: #134379;
+    color: #DFEBF4;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+.custom-dialog-container button:hover {
+    opacity: 0.8;
+}
+
+.custom-dialog-container button:active {
+    opacity: 0.4;
+}
+
+button[color="warn"] {
+    background-color: #dc3545;
+    color: #FFFFFF;
+}

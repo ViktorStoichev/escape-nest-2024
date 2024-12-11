@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { PostService } from '../post.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { PostService } from '../post.service';
 import { Post } from '../../types/post';
 import { LoaderComponent } from "../../global/loader/loader.component";
 import { AuthService } from '../../user/auth.service';
-import { FormsModule } from '@angular/forms';
 import { UserDataResponse } from '../../types/user';
+import { ConfirmDialogComponent } from '../../global/confirm-dialog/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-current-post',
@@ -24,7 +26,12 @@ export class CurrentPostComponent {
     isOwner: boolean = false;
     hasUser: boolean = false;
 
-    constructor(private authService: AuthService, private postService: PostService, private activatedRoute: ActivatedRoute, private datePipe: DatePipe, private router: Router) { }
+    constructor(private authService: AuthService,
+         private postService: PostService,
+          private activatedRoute: ActivatedRoute,
+           private datePipe: DatePipe,
+            private router: Router, 
+            private dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.authService.getUserData().subscribe(
@@ -54,13 +61,19 @@ export class CurrentPostComponent {
     }
 
     deletePost() {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent);
         const id: string = this.activatedRoute.snapshot.params['postId'];
-        this.postService.deletePost(id).subscribe({
-            next: (response) => {
-                this.router.navigate(['/posts']);
-            },
-            error: (error) => console.error(error),
-        });;
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.postService.deletePost(id).subscribe({
+                    next: (response) => {
+                        this.router.navigate(['/posts']);
+                    },
+                    error: (error) => console.error(error),
+                });
+            }
+        });
     }
 
     isPosting: boolean = false;
