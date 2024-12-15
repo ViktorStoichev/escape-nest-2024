@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { LoaderComponent } from "../../global/loader/loader.component";
 import { AuthService } from '../../user/auth.service';
 import { UserDataResponse } from '../../types/user';
 import { ConfirmDialogComponent } from '../../global/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-current-post',
@@ -17,7 +18,7 @@ import { ConfirmDialogComponent } from '../../global/confirm-dialog/confirm-dial
     templateUrl: './current-post.component.html',
     styleUrl: './current-post.component.css'
 })
-export class CurrentPostComponent {
+export class CurrentPostComponent implements OnDestroy {
     post: Post | null = null;
     isLoading = true;
     newComment: string = '';
@@ -25,6 +26,8 @@ export class CurrentPostComponent {
     owner: UserDataResponse | null = null
     isOwner: boolean = false;
     hasUser: boolean = false;
+
+    private subscriptions: Subscription = new Subscription();
 
     constructor(private authService: AuthService,
          private postService: PostService,
@@ -34,7 +37,7 @@ export class CurrentPostComponent {
             private dialog: MatDialog) { }
 
     ngOnInit(): void {
-        this.authService.getUserData().subscribe(
+        const userSub = this.authService.getUserData().subscribe(
             (response) => {
                 this.user = response;
                 this.hasUser = true;
@@ -46,11 +49,12 @@ export class CurrentPostComponent {
                 const id = this.activatedRoute.snapshot.params['postId'];
                 this.getPost(id);
             }
-        )
+        );
+        this.subscriptions.add(userSub);
     }
 
     getPost(id: string) {
-        this.postService.getSinglePost(id).subscribe((data) => {
+        const postSub = this.postService.getSinglePost(id).subscribe((data) => {
             this.post = data;
             if (this.user?._id == this.post.owner._id) {
                 this.isOwner = true;
@@ -58,13 +62,14 @@ export class CurrentPostComponent {
             }
             this.isLoading = false;
         });
+        this.subscriptions.add(postSub);
     }
 
     deletePost() {
         const dialogRef = this.dialog.open(ConfirmDialogComponent);
         const id: string = this.activatedRoute.snapshot.params['postId'];
 
-        dialogRef.afterClosed().subscribe((result) => {
+        const dialogSub = dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.postService.deletePost(id).subscribe({
                     next: (response) => {
@@ -74,6 +79,7 @@ export class CurrentPostComponent {
                 });
             }
         });
+        this.subscriptions.add(dialogSub);
     }
 
     isPosting: boolean = false;
@@ -83,7 +89,7 @@ export class CurrentPostComponent {
             this.isPosting = true;
             const id = this.activatedRoute.snapshot.params['postId'];
             if (this.user) {
-                this.postService.addComment(id, { avatar: this.user.avatar, username: this.user.username, text: this.newComment }).subscribe({
+                const commentSub = this.postService.addComment(id, { avatar: this.user.avatar, username: this.user.username, text: this.newComment }).subscribe({
                     next: (response) => {
                         this.newComment = '';
                         this.isPosting = false;
@@ -95,19 +101,25 @@ export class CurrentPostComponent {
                     }
 
                 });
+                this.subscriptions.add(commentSub);
             }
         }
     }
 
     toggleReaction(reaction: 'like' | 'dislike'): void {
         if (this.post && this.user) {
-          this.postService.toggleReaction(this.post._id, this.user._id, reaction).subscribe((updatedPost: Post) => {
+            const reactionSub = this.postService.toggleReaction(this.post._id, this.user._id, reaction).subscribe((updatedPost: Post) => {
             this.post = updatedPost;
           });
+          this.subscriptions.add(reactionSub);
         }
     }
 
     formatDate(date: string) {
         return this.datePipe.transform(date, 'short');
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }
