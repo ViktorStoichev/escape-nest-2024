@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { MatchPasswordsDirective } from '../../directives/match-passwords.directive';
@@ -6,6 +6,7 @@ import { EmailValidatorDirective } from '../../directives/validate-email.directi
 import { UserDataResponse } from '../../types/user';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './register.component.html',
     styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
     user = {
         avatar: '',
         username: '',
@@ -25,10 +26,12 @@ export class RegisterComponent {
 
     errorMsg: string = '';
 
+    private subscriptions: Subscription = new Subscription();
+
     constructor(private auth: AuthService, private router: Router) { }
 
     register() {
-        this.auth.register({ avatar: this.user.avatar, username: this.user.username, email: this.user.email, password: this.user.password }).subscribe(
+        const registerSub = this.auth.register({ avatar: this.user.avatar, username: this.user.username, email: this.user.email, password: this.user.password }).subscribe(
             (res: UserDataResponse) => {
                 this.errorMsg = '';
                 this.router.navigate(['/home']);
@@ -37,6 +40,7 @@ export class RegisterComponent {
                 this.showError(err.error.message);
             }
         );
+        this.subscriptions.add(registerSub);
     }
 
     showError(message: string) {
@@ -45,5 +49,9 @@ export class RegisterComponent {
         setTimeout(() => {
           this.errorMsg = '';
         }, 5000);
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }

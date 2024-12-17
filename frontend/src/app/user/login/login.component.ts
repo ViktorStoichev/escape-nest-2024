@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UserDataResponse } from '../../types/user';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-login',
@@ -12,7 +13,7 @@ import { UserDataResponse } from '../../types/user';
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
     user = {
         email: '',
         password: ''
@@ -20,10 +21,12 @@ export class LoginComponent {
 
     errorMsg: string = '';
 
+    private subscriptions: Subscription = new Subscription();
+
     constructor(private auth: AuthService, private router: Router) { }
 
     login() {
-        this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
+        const loginSub = this.auth.login({ email: this.user.email, password: this.user.password }).subscribe(
             (res: UserDataResponse) => {
                 this.errorMsg = '';
                 this.router.navigate(['/home']);
@@ -32,6 +35,7 @@ export class LoginComponent {
                 this.showError(err.error.message);
             }
         );
+        this.subscriptions.add(loginSub);
     }
 
     showError(message: string) {
@@ -40,5 +44,9 @@ export class LoginComponent {
         setTimeout(() => {
             this.errorMsg = '';
         }, 5000);
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }

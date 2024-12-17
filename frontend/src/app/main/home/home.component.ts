@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { PostService } from '../../post/post.service';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './home.component.html',
     styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnDestroy, OnInit {
     posts = signal<Post[]>([])
     isLoading = signal(true);
 

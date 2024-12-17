@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
 import { Post } from '../../types/post';
@@ -6,6 +6,7 @@ import { AuthService } from '../../user/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserDataResponse } from '../../types/user';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-add-post',
@@ -14,7 +15,7 @@ import { UserDataResponse } from '../../types/user';
     templateUrl: './add-post.component.html',
     styleUrl: './add-post.component.css'
 })
-export class AddPostComponent {
+export class AddPostComponent implements OnDestroy {
     post = {
         imageUrl: '',
         location: '',
@@ -23,13 +24,15 @@ export class AddPostComponent {
     };
     user: UserDataResponse | null = null
 
+    private subscriptions: Subscription = new Subscription();
+
     constructor(private authService: AuthService, private postService: PostService, private router: Router) { }
 
 
     onSubmit(form: NgForm, event: Event, imageUrl: string, location: string, region: string, description: string) {
         event.preventDefault();
         
-        this.authService.getUserData().subscribe((data) => {
+        const userSub = this.authService.getUserData().subscribe((data) => {
             this.user = data;
             this.postService.createPost({ place:
                 { imageUrl, location, region }, owner: { _id: this.user?._id, avatar: this.user?.avatar, username: this.user?.username }, description }
@@ -42,5 +45,10 @@ export class AddPostComponent {
                },
            });
         });
+        this.subscriptions.add(userSub);
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }

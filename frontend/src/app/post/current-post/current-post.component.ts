@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './current-post.component.html',
     styleUrl: './current-post.component.css'
 })
-export class CurrentPostComponent implements OnDestroy {
+export class CurrentPostComponent implements OnDestroy, OnInit {
     post: Post | null = null;
     isLoading = true;
     newComment: string = '';

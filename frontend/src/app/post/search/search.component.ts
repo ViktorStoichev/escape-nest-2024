@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { PostService } from '../post.service';
 import { Post } from '../../types/post';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './search.component.html',
     styleUrl: './search.component.css'
 })
-export class SearchComponent implements OnDestroy {
+export class SearchComponent implements OnDestroy, OnInit {
     posts = signal<Post[]>([]);
     filteredPosts = signal<Post[]>([]);
     isLoading = signal(true);
